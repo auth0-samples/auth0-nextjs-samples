@@ -1,0 +1,38 @@
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  white-space: pre-wrap; 
+  word-break: break-all; 
+}
+
+#__next {
+  height: 100%;
+}
+
+#nav-mobile {
+  min-height: 170px;
+}
+
+.router-link {
+  cursor: pointer;
+}
+
+.nav-item.dropdown .dropdown-item {
+  padding: 0;
+}
+
+.nav-item.dropdown .dropdown-item .router-link {
+  width: 100%;
+  padding: .55rem 1.5rem;
+}
+
+.navbar .router-link-exact-active {
+  margin-bottom: -3px;
+}
+
+.result-block-container .result-block {
+  opacity: 1;
+}
