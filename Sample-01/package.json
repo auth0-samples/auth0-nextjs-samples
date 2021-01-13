@@ -1,0 +1,68 @@
+{
+  "name": "auth0-nextjs-sample",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "test": "jest tests --coverage --maxWorkers=10",
+    "test:watch": "jest --coverage --watch",
+    "test:integration": "start-server-and-test start http-get://localhost:3000 cypress:run",
+    "test:integration:watch": "start-server-and-test start http-get://localhost:3000 cypress:open",
+    "cypress:run": "cypress run",
+    "cypress:open": "cypress open"
+  },
+  "dependencies": {
+    "@auth0/nextjs-auth0": "file:auth0-nextjs-auth0-1.0.0-beta.0.tgz",
+    "@fortawesome/fontawesome-svg-core": "^1.2.32",
+    "@fortawesome/free-solid-svg-icons": "^5.15.1",
+    "@fortawesome/react-fontawesome": "^0.1.14",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-jwt": "^6.0.0",
+    "helmet": "^4.3.1",
+    "highlight.js": "^10.5.0",
+    "jwks-rsa": "^1.12.2",
+    "morgan": "^1.10.0",
+    "next": "10.0.5",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
+    "reactstrap": "^8.8.1"
+  },
+  "devDependencies": {
+    "@testing-library/dom": "^7.29.4",
+    "@testing-library/jest-dom": "^5.11.8",
+    "@testing-library/react": "^11.2.3",
+    "babel-jest": "^26.6.3",
+    "cypress": "^6.2.1",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^26.6.3",
+    "prettier": "^2.2.1",
+    "start-server-and-test": "^1.11.7"
+  },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "rootDir": "./",
+    "moduleNameMapper": {
+      ".(css)$": "identity-obj-proxy"
+    },
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
+    "setupFilesAfterEnv": [
+      "./tests/setup.js"
+    ],
+    "collectCoverageFrom": [
+      "components/**/*.*",
+      "pages/**/*.*"
+    ],
+    "coverageReporters": [
+      "lcov",
+      "text",
+      "text-summary"
+    ]
+  }
+}
