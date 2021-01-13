@@ -5,7 +5,7 @@ import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import Loading from '../components/Loading';
 import Highlight from '../components/Highlight';
 
-function ExternalApiComponent() {
+function ExternalApi() {
   const [isLoading, setIsLoading] = useState(false);
   const [response, setResponse] = useState();
   const [error, setError] = useState();
@@ -59,7 +59,7 @@ function ExternalApiComponent() {
   );
 }
 
-export default withPageAuthRequired(ExternalApiComponent, {
+export default withPageAuthRequired(ExternalApi, {
   onRedirecting: () => <Loading />,
   onError: () => <div>Error!</div>
 });
