@@ -1,32 +1,112 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/api-reference/create-next-app).
+# Auth0 Next.js SDK Sample Application
 
-## Getting Started
+This sample demonstrates the integration of [Auth0 Next.js SDK](https://github.com/auth0/nextjs-auth0) into a Next.js application created using [create-next-app](https://nextjs.org/docs/api-reference/create-next-app). The sample is a companion to the [Auth0 Next.js SDK Quickstart](https://auth0.com/docs/quickstart/webapp/nextjs).
 
-First, run the development server:
+This sample demonstrates the following use cases:
+
+- [Login](https://github.com/auth0-samples/auth0-nextjs-samples/blob/main/Sample-01/components/NavBar.jsx#L48-L54)
+- [Logout](https://github.com/auth0-samples/auth0-nextjs-samples/blob/main/Sample-01/components/NavBar.jsx#L80-L82)
+- [Showing the user profile](https://github.com/auth0-samples/auth0-nextjs-samples/blob/main/Sample-01/pages/profile.jsx)
+- [Protecting client-side rendered pages](https://github.com/auth0-samples/auth0-nextjs-samples/blob/main/Sample-01/pages/profile.jsx#L42-L45)
+- [Calling APIs](https://github.com/auth0-samples/auth0-nextjs-samples/blob/main/Sample-01/pages/external.jsx)
+
+## Project setup
+
+Use `npm` to install the project dependencies:
+
+```bash
+npm install
+```
+
+## Configuration
+
+### Create an API
+
+For the **External API** page to work, you will need to [create an API](https://auth0.com/docs/authorization/apis) using the [management dashboard](https://manage.auth0.com/#/apis). This will give you an API Identifier that you can use in the `AUTH0_AUDIENCE` environment variable below.
+
+If you do not wish to use an API or observe the API call working, you should not specify the `AUTH0_AUDIENCE` value in the next step. Otherwise, you will receive a `Service not found` error when trying to authenticate.
+
+### Configure credentials
+
+The project needs to be configured with your Auth0 Domain, Client ID and Client Secret for the authentication flow to work.
+
+To do this, first copy `.env.local.example` into a new file in the same folder called `.env.local`, and replace the values with your own Auth0 application credentials, plus the base URL of your application (see more info about [loading environmental variables in Next.js](https://nextjs.org/docs/basic-features/environment-variables)):
+
+```sh
+# A long secret value used to encrypt the session cookie
+AUTH0_SECRET='LONG_RANDOM_VALUE'
+# The base url of your application
+AUTH0_BASE_URL='http://localhost:3000'
+# The url of your Auth0 tenant domain
+AUTH0_ISSUER_BASE_URL='https://YOUR_AUTH0_DOMAIN.auth0.com'
+# Your Auth0 application's Client ID
+AUTH0_CLIENT_ID='YOUR_AUTH0_CLIENT_ID'
+# Your Auth0 application's Client Secret
+AUTH0_CLIENT_SECRET='YOUR_AUTH0_CLIENT_SECRET'
+# Your Auth0 API's Identifier
+AUTH0_AUDIENCE='YOUR_AUTH0_API_IDENTIFIER'
+```
+
+**Note**: You can generate a suitable string for `AUTH0_SECRET` using `openssl rand -hex 32` on the command line.
+
+## Run the sample
+
+### Compile and hot-reload for development
+
+This compiles and serves the Next.js app and starts the API server on port 3001.
 
 ```bash
 npm run dev
-# or
-yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Deployment
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+### Compiles and minifies for production
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+```bash
+npm run build
+```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+### Docker build
 
-## Learn More
+To build and run the Docker image, run `exec.sh`, or `exec.ps1` on Windows.
 
-To learn more about Next.js, take a look at the following resources:
+### Run the unit tests
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run test
+```
 
-## Deploy on Vercel
+### Run the integration tests
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import) from the creators of Next.js.
+```bash
+npm run test:integration
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## What is Auth0?
+
+Auth0 helps you to:
+
+* Add authentication with [multiple sources](https://auth0.com/docs/identityproviders), either social identity providers such as **Google, Facebook, Microsoft Account, LinkedIn, GitHub, Twitter, Box, Salesforce** (amongst others), or enterprise identity systems like **Windows Azure AD, Google Apps, Active Directory, ADFS, or any SAML Identity Provider**.
+* Add authentication through more traditional **[username/password databases](https://auth0.com/docs/connections/database/custom-db)**.
+* Add support for **[linking different user accounts](https://auth0.com/docs/users/user-account-linking)** with the same user.
+* Support for generating signed [JSON Web Tokens](https://auth0.com/docs/tokens/json-web-tokens) to call your APIs and **flow the user identity** securely.
+* Analytics of how, when, and where users are logging in.
+* Pull data from other sources and add it to the user profile through [JavaScript rules](https://auth0.com/docs/rules).
+
+## Create a Free Auth0 Account
+
+1. Go to [Auth0](https://auth0.com) and click **Sign Up**.
+2. Use Google, GitHub, or Microsoft Account to login.
+
+## Issue Reporting
+
+If you have found a bug or if you have a feature request, please report them at this repository issues section. Please do not report security vulnerabilities on the public GitHub issue tracker. The [Responsible Disclosure Program](https://auth0.com/responsible-disclosure-policy) details the procedure for disclosing security issues.
+
+## Author
+
+[Auth0](https://auth0.com)
+
+## License
+
+This project is licensed under the MIT license. See the [LICENSE](./LICENSE) file for more info.

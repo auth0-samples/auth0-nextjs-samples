@@ -1,6 +1,6 @@
 import { getAccessToken, withApiAuthRequired } from '@auth0/nextjs-auth0';
 
-export default withApiAuthRequired(async function products(req, res) {
+export default withApiAuthRequired(async function shows(req, res) {
   try {
     const { accessToken } = await getAccessToken(req, res, {
       scopes: ['read:shows']
