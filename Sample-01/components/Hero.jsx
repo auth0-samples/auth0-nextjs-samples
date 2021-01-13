@@ -11,7 +11,7 @@ const Hero = () => (
 
     <p className="lead" data-testid="hero-lead">
       This is a sample application that demonstrates an authentication flow for a Regular Web App, using{' '}
-      <a href="https://nextjs.org">Nexts.js</a>
+      <a href="https://nextjs.org">Next.js</a>
     </p>
   </div>
 );
