@@ -26,8 +26,8 @@ function ExternalApi() {
     }
   };
 
-  const handle = (e, fn) => {
-    e.preventDefault();
+  const handle = (event, fn) => {
+    event.preventDefault();
     fn();
   };
 
@@ -40,7 +40,7 @@ function ExternalApi() {
           the API will validate it using the API's audience value.
         </p>
 
-        <Button color="primary" className="mt-5" onClick={e => handle(e, callApi)} data-testid="external-ping">
+        <Button color="primary" className="mt-5" onClick={e => handle(e, callApi)} data-testid="external-action">
           Ping API
         </Button>
       </div>

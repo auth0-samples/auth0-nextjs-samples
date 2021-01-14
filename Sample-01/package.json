@@ -56,6 +56,9 @@
       "js",
       "jsx"
     ],
+    "setupFiles": [
+      "./tests/environment.js"
+    ],
     "setupFilesAfterEnv": [
       "./tests/setup.js"
     ],
