@@ -20,6 +20,7 @@ function ExternalApi() {
       setResponse(data);
       setError(undefined);
     } catch (error) {
+      setResponse(undefined);
       setError(error);
     } finally {
       setIsLoading(false);
