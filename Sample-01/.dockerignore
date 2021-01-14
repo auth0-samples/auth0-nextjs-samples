@@ -1,5 +1,5 @@
 node_modules/
-build/
+# build/
 exec.*
 npm-debug.log*
 yarn-error.log
@@ -10,7 +10,6 @@ README.md
 
 # misc
 .DS_Store
-.env.local
 .env.development.local
 .env.test.local
 .env.production.local
