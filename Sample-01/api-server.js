@@ -39,4 +39,5 @@ app.get('/api/shows', checkJwt, (req, res) => {
   });
 });
 
-app.listen(port, () => console.log(`API Server listening on port ${port}`));
+const server = app.listen(port, () => console.log(`API Server listening on port ${port}`));
+process.on('SIGINT', () => server.close());

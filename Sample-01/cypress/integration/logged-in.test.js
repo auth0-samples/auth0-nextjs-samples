@@ -25,21 +25,14 @@ describe('logged in', () => {
     });
 
     it('should display the navigation bar', () => {
-      cy.get('[data-testid=navbar-items]').children().should('have.length', 2);
-      cy.get('[data-testid=navbar-menu-desktop]').should('exist');
       cy.get('[data-testid=navbar-menu-desktop]').should('be.visible');
-      cy.get('[data-testid=navbar-menu-mobile]').should('exist');
       cy.get('[data-testid=navbar-menu-mobile]').should('not.be.visible');
-      cy.get('[data-testid=navbar-picture-desktop]').should('exist');
       cy.get('[data-testid=navbar-picture-desktop]').should('be.visible');
     });
 
     it('should expand the navigation bar menu', () => {
-      cy.get('[data-testid=navbar-user-desktop]').should('exist');
       cy.get('[data-testid=navbar-user-desktop]').should('not.be.visible');
-      cy.get('[data-testid=navbar-profile-desktop]').should('exist');
       cy.get('[data-testid=navbar-profile-desktop]').should('not.be.visible');
-      cy.get('[data-testid=navbar-logout-desktop]').should('exist');
       cy.get('[data-testid=navbar-logout-desktop]').should('not.be.visible');
       cy.get('[data-testid=navbar-menu-desktop]').click();
       cy.get('[data-testid=navbar-user-desktop]').should('be.visible');
@@ -48,24 +41,22 @@ describe('logged in', () => {
     });
 
     it('should display the home page', () => {
-      cy.get('[data-testid=navbar-home]').should('exist');
       cy.get('[data-testid=navbar-home]').click();
       cy.url().should('eq', `${Cypress.config().baseUrl}/`);
 
       cy.get('[data-testid=navbar-home]').isActive();
-      cy.get('[data-testid=hero]').should('exist');
-      cy.get('[data-testid=content]').should('exist');
-      cy.get('[data-testid=footer]').should('exist');
+      cy.get('[data-testid=hero]').should('be.visible');
+      cy.get('[data-testid=content]').should('be.visible');
+      cy.get('[data-testid=footer]').should('be.visible');
     });
 
     it('should display the external API page', () => {
-      cy.get('[data-testid=navbar-external]').should('exist');
       cy.get('[data-testid=navbar-external]').click();
       cy.url().should('eq', `${Cypress.config().baseUrl}/external`);
 
       cy.get('[data-testid=navbar-home]').isNotActive();
       cy.get('[data-testid=navbar-external]').isActive();
-      cy.get('[data-testid=external]').should('exist');
+      cy.get('[data-testid=external]').should('be.visible');
     });
 
     it('should display the profile page', () => {
@@ -75,7 +66,7 @@ describe('logged in', () => {
 
       cy.get('[data-testid=navbar-home]').isNotActive();
       cy.get('[data-testid=navbar-external]').isNotActive();
-      cy.get('[data-testid=profile]').should('exist');
+      cy.get('[data-testid=profile]').should('be.visible');
       cy.get('[data-testid=profile-email]').contains(EMAIL);
       cy.get('[data-testid=profile-info]').contains(EMAIL);
     });
@@ -97,10 +88,14 @@ describe('logged in', () => {
     beforeEach(() => cy.mobileViewport());
 
     it('should expand the navigation bar menu', () => {
+      cy.get('[data-testid=navbar-menu-mobile]').should('not.be.visible');
+      cy.get('[data-testid=navbar-picture-mobile]').should('not.be.visible');
       cy.get('[data-testid=navbar-user-mobile]').should('not.be.visible');
       cy.get('[data-testid=navbar-profile-mobile]').should('not.be.visible');
       cy.get('[data-testid=navbar-logout-mobile]').should('not.be.visible');
       cy.get('[data-testid=navbar-toggle]').click();
+      cy.get('[data-testid=navbar-menu-mobile]').should('be.visible');
+      cy.get('[data-testid=navbar-picture-mobile]').should('be.visible');
       cy.get('[data-testid=navbar-user-mobile]').should('be.visible');
       cy.get('[data-testid=navbar-profile-mobile]').should('be.visible');
       cy.get('[data-testid=navbar-logout-mobile]').should('be.visible');
