@@ -50,13 +50,34 @@ describe('logged in', () => {
       cy.get('[data-testid=footer]').should('be.visible');
     });
 
+    it('should display the client-side rendered page', () => {
+      cy.get('[data-testid=navbar-csr]').click();
+      cy.url().should('eq', `${Cypress.config().baseUrl}/csr`);
+
+      cy.get('[data-testid=navbar-csr]').isActive();
+      cy.get('[data-testid=csr]').should('be.visible');
+    });
+
+    it('should display the server-side rendered page', () => {
+      cy.get('[data-testid=navbar-ssr]').click();
+      cy.url().should('eq', `${Cypress.config().baseUrl}/ssr`);
+
+      cy.get('[data-testid=navbar-ssr]').isActive();
+      cy.get('[data-testid=ssr]').should('be.visible');
+    });
+
     it('should display the external API page', () => {
       cy.get('[data-testid=navbar-external]').click();
       cy.url().should('eq', `${Cypress.config().baseUrl}/external`);
 
-      cy.get('[data-testid=navbar-home]').isNotActive();
       cy.get('[data-testid=navbar-external]').isActive();
       cy.get('[data-testid=external]').should('be.visible');
+    });
+
+    it('should display the external API result', () => {
+      cy.get('[data-testid=navbar-external]').click();
+      cy.get('[data-testid=external-action]').click();
+      cy.get('[data-testid=external-result]').should('be.visible');
     });
 
     it('should display the profile page', () => {
@@ -64,8 +85,6 @@ describe('logged in', () => {
       cy.get('[data-testid=navbar-profile-desktop]').click();
       cy.url().should('eq', `${Cypress.config().baseUrl}/profile`);
 
-      cy.get('[data-testid=navbar-home]').isNotActive();
-      cy.get('[data-testid=navbar-external]').isNotActive();
       cy.get('[data-testid=profile]').should('be.visible');
       cy.get('[data-testid=profile-email]').contains(EMAIL);
       cy.get('[data-testid=profile-info]').contains(EMAIL);

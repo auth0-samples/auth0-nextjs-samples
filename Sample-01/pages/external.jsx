@@ -36,16 +36,14 @@ function ExternalApi() {
     <>
       <div className="mb-5" data-testid="external">
         <h1 data-testid="external-title">External API</h1>
-        <p data-testid="external-description">
+        <p data-testid="external-text">
           Ping an external API by clicking the button below. This will call the external API using an access token, and
           the API will validate it using the API's audience value.
         </p>
-
         <Button color="primary" className="mt-5" onClick={e => handle(e, callApi)} data-testid="external-action">
           Ping API
         </Button>
       </div>
-
       <div className="result-block-container">
         {isLoading && <Loading />}
         {(error || response) && (
