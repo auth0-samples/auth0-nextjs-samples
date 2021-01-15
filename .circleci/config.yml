@@ -1,0 +1,32 @@
+version: 2.1
+
+jobs:
+  Sample-01:
+    working_directory: ~/samples/Sample-01
+    docker:
+      - image: circleci/node:lts-browsers
+    steps:
+      - checkout:
+          path: ~/samples
+      - restore_cache:
+          key: dependencies-{{ .Branch }}-{{ checksum "package-lock.json" }}
+      - run: npm ci
+      - save_cache:
+          key: dependencies-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          paths:
+            - ~/.npm
+            - ~/.cache
+      - run: npm run build
+      - run: npm test
+      - run: npm run test:integration
+      - store_test_results:
+          path: test-results
+      - store_artifacts:
+          path: cypress/videos
+      - store_artifacts:
+          path: cypress/screenshots
+
+workflows:
+  Build and Test:
+    jobs:
+      - Sample-01
