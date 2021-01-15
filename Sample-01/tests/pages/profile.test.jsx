@@ -11,11 +11,11 @@ describe('profile', () => {
     expect(screen.getByTestId('profile')).toBeInTheDocument();
     expect(screen.getByTestId('profile-picture')).toBeInTheDocument();
     expect(screen.getByTestId('profile-name')).toBeInTheDocument();
-    expect(screen.getByTestId('profile-info')).toBeInTheDocument();
+    expect(screen.getByTestId('profile-json')).toBeInTheDocument();
   });
 
   it('should render a spinner when the user is loading', async () => {
-    render(<Profile />, { wrapper: withUserProvider() });
+    render(<Profile />);
 
     waitFor(() => screen.getByTestId('loading').toBeInTheDocument());
   });

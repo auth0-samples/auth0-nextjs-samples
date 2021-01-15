@@ -8,6 +8,11 @@ code {
   word-break: break-all; 
 }
 
+p code {
+  color: var(--secondary);
+  font-weight: 600;
+}
+
 #__next {
   height: 100%;
 }

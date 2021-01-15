@@ -13,7 +13,7 @@ describe('index', () => {
 
     expect(screen.getByTestId('external')).toBeInTheDocument();
     expect(screen.getByTestId('external-title')).toBeInTheDocument();
-    expect(screen.getByTestId('external-description')).toBeInTheDocument();
+    expect(screen.getByTestId('external-text')).toBeInTheDocument();
     expect(screen.getByTestId('external-action')).toBeInTheDocument();
     expect(screen.queryByTestId('external-result')).not.toBeInTheDocument();
   });
@@ -27,7 +27,7 @@ describe('index', () => {
   });
 
   it('should call the API when the button is clicked', async () => {
-    global.fetch = () => ({ json: () => Promise.resolve(JSON.stringify({ msg: 'Text' })) });
+    global.fetch = () => ({ json: () => Promise.resolve({ msg: 'Text' }) });
 
     render(<ExternalApi />);
 

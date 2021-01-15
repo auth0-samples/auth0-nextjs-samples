@@ -35,11 +35,23 @@ const NavBar = () => {
                 </RouterLink>
               </NavItem>
               {user && (
-                <NavItem>
-                  <RouterLink href="/external" className="nav-link" testId="navbar-external">
-                    External API
-                  </RouterLink>
-                </NavItem>
+                <>
+                  <NavItem>
+                    <RouterLink href="/csr" className="nav-link" testId="navbar-csr">
+                      Client-side rendered page
+                    </RouterLink>
+                  </NavItem>
+                  <NavItem>
+                    <RouterLink href="/ssr" className="nav-link" testId="navbar-ssr">
+                      Server-side rendered page
+                    </RouterLink>
+                  </NavItem>
+                  <NavItem>
+                    <RouterLink href="/external" className="nav-link" testId="navbar-external">
+                      External API
+                    </RouterLink>
+                  </NavItem>
+                </>
               )}
             </Nav>
             <Nav className="d-none d-md-block" navbar>
