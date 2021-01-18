@@ -3,9 +3,10 @@ import { Button } from 'reactstrap';
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 
 import Loading from '../components/Loading';
+import ErrorMessage from '../components/ErrorMessage';
 import Highlight from '../components/Highlight';
 
-function ExternalApi() {
+function External() {
   const [isLoading, setIsLoading] = useState(false);
   const [response, setResponse] = useState();
   const [error, setError] = useState();
@@ -49,7 +50,7 @@ function ExternalApi() {
         {(error || response) && (
           <div className="result-block" data-testid="external-result">
             <h6 className="muted">Result</h6>
-            {error && <div>{error.message}</div>}
+            {error && <ErrorMessage>{error.message}</ErrorMessage>}
             {response && <Highlight>{JSON.stringify(response, null, 2)}</Highlight>}
           </div>
         )}
@@ -58,7 +59,7 @@ function ExternalApi() {
   );
 }
 
-export default withPageAuthRequired(ExternalApi, {
+export default withPageAuthRequired(External, {
   onRedirecting: () => <Loading />,
-  onError: () => <div>Error!</div>
+  onError: error => <ErrorMessage>{error.message}</ErrorMessage>
 });

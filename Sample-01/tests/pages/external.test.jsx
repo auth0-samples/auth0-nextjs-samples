@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 
-import ExternalApi from '../../pages/external';
+import External from '../../pages/external';
 
 describe('index', () => {
   afterAll(() => {
@@ -9,7 +9,7 @@ describe('index', () => {
   });
 
   it('should render without crashing', async () => {
-    render(<ExternalApi />);
+    render(<External />);
 
     expect(screen.getByTestId('external')).toBeInTheDocument();
     expect(screen.getByTestId('external-title')).toBeInTheDocument();
@@ -21,7 +21,7 @@ describe('index', () => {
   it('should render a spinner when the button is clicked', async () => {
     global.fetch = () => ({ json: () => Promise.resolve() });
 
-    render(<ExternalApi />);
+    render(<External />);
 
     waitFor(() => screen.getByTestId('loading').toBeInTheDocument());
   });
@@ -29,11 +29,22 @@ describe('index', () => {
   it('should call the API when the button is clicked', async () => {
     global.fetch = () => ({ json: () => Promise.resolve({ msg: 'Text' }) });
 
-    render(<ExternalApi />);
+    render(<External />);
 
     fireEvent.click(screen.getByTestId('external-action'));
     await waitFor(() => screen.getByTestId('external-result'));
 
     expect(await screen.findByText(/Text/)).toBeInTheDocument();
+  });
+
+  it('should render an error message when the API call fails', async () => {
+    global.fetch = () => ({ json: () => Promise.reject(new Error('Error')) });
+
+    render(<External />);
+
+    fireEvent.click(screen.getByTestId('external-action'));
+    await waitFor(() => screen.getByTestId('error'));
+
+    expect(await screen.findByText('Error')).toBeInTheDocument();
   });
 });
