@@ -45,7 +45,7 @@ describe('index', () => {
   it('should render an error when the API call fails', async () => {
     global.fetch = () => ({ json: () => Promise.reject(new Error('Error')) });
 
-    render(<ExternalApi />);
+    render(<External />);
 
     fireEvent.click(screen.getByTestId('external-action'));
     await waitFor(() => screen.getByTestId('external-result'));
