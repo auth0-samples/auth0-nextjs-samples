@@ -1,5 +1,8 @@
 # Auth0 Next.js Samples
 
+[![CircleCI](https://img.shields.io/circleci/build/github/auth0-samples/auth0-nextjs-samples?style=flat-square)](https://circleci.com/gh/auth0-samples/auth0-nextjs-samples)
+[![License](https://img.shields.io/:license-mit-blue.svg?style=flat)](https://opensource.org/licenses/MIT)
+
 This is the sample code for the [Auth0 Next.js Quickstart](https://auth0.com/docs/quickstart/webapp/nextjs) using [nextjs-auth0](https://github.com/auth0/nextjs-auth0).
 
 Please check out [the sample application](./Sample-01) for an example of how to integrate the Auth0 Next.js SDK into your Next.js applications.
