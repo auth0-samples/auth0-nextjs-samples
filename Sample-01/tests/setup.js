@@ -21,6 +21,8 @@ jest.mock('@auth0/nextjs-auth0', () => {
 
   return {
     ...originalModule,
+    getAccessToken: () => 'access_token',
+    withApiAuthRequired: handler => handler,
     withPageAuthRequired: page => () => page()
   };
 });

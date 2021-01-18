@@ -8,6 +8,7 @@ describe('profile', () => {
   it('should render without crashing', async () => {
     render(<Profile />, { wrapper: withUserProvider({ user: mockUser }) });
 
+    expect(screen.queryByTestId('loading')).not.toBeInTheDocument();
     expect(screen.getByTestId('profile')).toBeInTheDocument();
     expect(screen.getByTestId('profile-picture')).toBeInTheDocument();
     expect(screen.getByTestId('profile-name')).toBeInTheDocument();
@@ -18,5 +19,15 @@ describe('profile', () => {
     render(<Profile />);
 
     waitFor(() => screen.getByTestId('loading').toBeInTheDocument());
+    waitFor(() => screen.queryByTestId('profile').not.toBeInTheDocument());
+  });
+
+  it('should render the user profile', async () => {
+    render(<Profile />, { wrapper: withUserProvider({ user: mockUser }) });
+
+    waitFor(() => screen.queryByTestId('loading').not.toBeInTheDocument());
+    Object.keys(mockUser).forEach(key => {
+      () => screen.getByTestId('profile-json').text().toContain(mockUser[key]);
+    });
   });
 });

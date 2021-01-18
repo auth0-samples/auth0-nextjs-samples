@@ -25,9 +25,12 @@ describe('logged in', () => {
     });
 
     it('should display the navigation bar', () => {
+      cy.get('[data-testid=navbar]').should('be.visible');
+      cy.get('[data-testid=navbar-items]').should('be.visible');
       cy.get('[data-testid=navbar-menu-desktop]').should('be.visible');
       cy.get('[data-testid=navbar-menu-mobile]').should('not.be.visible');
       cy.get('[data-testid=navbar-picture-desktop]').should('be.visible');
+      cy.get('[data-testid=navbar-picture-mobile]').should('not.be.visible');
     });
 
     it('should expand the navigation bar menu', () => {
@@ -40,6 +43,10 @@ describe('logged in', () => {
       cy.get('[data-testid=navbar-logout-desktop]').should('be.visible');
     });
 
+    it('should display the footer', () => {
+      cy.get('[data-testid=footer]').should('be.visible');
+    });
+
     it('should display the home page', () => {
       cy.get('[data-testid=navbar-home]').click();
       cy.url().should('eq', `${Cypress.config().baseUrl}/`);
@@ -47,7 +54,6 @@ describe('logged in', () => {
       cy.get('[data-testid=navbar-home]').isActive();
       cy.get('[data-testid=hero]').should('be.visible');
       cy.get('[data-testid=content]').should('be.visible');
-      cy.get('[data-testid=footer]').should('be.visible');
     });
 
     it('should display the client-side rendered page', () => {
@@ -64,6 +70,7 @@ describe('logged in', () => {
 
       cy.get('[data-testid=navbar-ssr]').isActive();
       cy.get('[data-testid=ssr]').should('be.visible');
+      cy.get('[data-testid=ssr-json]').contains(EMAIL);
     });
 
     it('should display the external API page', () => {
@@ -87,7 +94,7 @@ describe('logged in', () => {
 
       cy.get('[data-testid=profile]').should('be.visible');
       cy.get('[data-testid=profile-email]').contains(EMAIL);
-      cy.get('[data-testid=profile-info]').contains(EMAIL);
+      cy.get('[data-testid=profile-json]').contains(EMAIL);
     });
   });
 
@@ -107,12 +114,14 @@ describe('logged in', () => {
     beforeEach(() => cy.mobileViewport());
 
     it('should expand the navigation bar menu', () => {
+      cy.get('[data-testid=navbar-items]').should('not.be.visible');
       cy.get('[data-testid=navbar-menu-mobile]').should('not.be.visible');
       cy.get('[data-testid=navbar-picture-mobile]').should('not.be.visible');
       cy.get('[data-testid=navbar-user-mobile]').should('not.be.visible');
       cy.get('[data-testid=navbar-profile-mobile]').should('not.be.visible');
       cy.get('[data-testid=navbar-logout-mobile]').should('not.be.visible');
       cy.get('[data-testid=navbar-toggle]').click();
+      cy.get('[data-testid=navbar-items]').should('be.visible');
       cy.get('[data-testid=navbar-menu-mobile]').should('be.visible');
       cy.get('[data-testid=navbar-picture-mobile]').should('be.visible');
       cy.get('[data-testid=navbar-user-mobile]').should('be.visible');

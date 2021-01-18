@@ -10,6 +10,10 @@ describe('logged out', () => {
       cy.get('[data-testid=navbar-toggle]').should('not.be.visible');
     });
 
+    it('should display the footer', () => {
+      cy.get('[data-testid=footer]').should('be.visible');
+    });
+
     it('should display the home page', () => {
       cy.get('[data-testid=navbar-home]').click();
       cy.url().should('eq', `${Cypress.config().baseUrl}/`);
@@ -17,7 +21,6 @@ describe('logged out', () => {
       cy.get('[data-testid=navbar-home]').isActive();
       cy.get('[data-testid=hero]').should('be.visible');
       cy.get('[data-testid=content]').should('be.visible');
-      cy.get('[data-testid=footer]').should('be.visible');
     });
   });
 
