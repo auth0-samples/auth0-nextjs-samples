@@ -11,6 +11,7 @@ describe('index', () => {
   it('should render without crashing', async () => {
     render(<ExternalApi />);
 
+    expect(screen.queryByTestId('loading')).not.toBeInTheDocument();
     expect(screen.getByTestId('external')).toBeInTheDocument();
     expect(screen.getByTestId('external-title')).toBeInTheDocument();
     expect(screen.getByTestId('external-text')).toBeInTheDocument();
@@ -23,7 +24,10 @@ describe('index', () => {
 
     render(<ExternalApi />);
 
+    fireEvent.click(screen.getByTestId('external-action'));
+
     waitFor(() => screen.getByTestId('loading').toBeInTheDocument());
+    waitFor(() => screen.queryByTestId('external-result').not.toBeInTheDocument());
   });
 
   it('should call the API when the button is clicked', async () => {
@@ -34,6 +38,19 @@ describe('index', () => {
     fireEvent.click(screen.getByTestId('external-action'));
     await waitFor(() => screen.getByTestId('external-result'));
 
+    expect(screen.queryByTestId('loading')).not.toBeInTheDocument();
     expect(await screen.findByText(/Text/)).toBeInTheDocument();
+  });
+
+  it('should render an error when the API call fails', async () => {
+    global.fetch = () => ({ json: () => Promise.reject(new Error('Error')) });
+
+    render(<ExternalApi />);
+
+    fireEvent.click(screen.getByTestId('external-action'));
+    await waitFor(() => screen.getByTestId('external-result'));
+
+    expect(screen.queryByTestId('loading')).not.toBeInTheDocument();
+    expect(await screen.findByText(/Error/)).toBeInTheDocument();
   });
 });
