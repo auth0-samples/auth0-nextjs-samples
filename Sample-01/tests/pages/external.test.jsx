@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 
-import ExternalApi from '../../pages/external';
+import External from '../../pages/external';
 
 describe('index', () => {
   afterAll(() => {
@@ -9,7 +9,7 @@ describe('index', () => {
   });
 
   it('should render without crashing', async () => {
-    render(<ExternalApi />);
+    render(<External />);
 
     expect(screen.queryByTestId('loading')).not.toBeInTheDocument();
     expect(screen.getByTestId('external')).toBeInTheDocument();
@@ -22,7 +22,7 @@ describe('index', () => {
   it('should render a spinner when the button is clicked', async () => {
     global.fetch = () => ({ json: () => Promise.resolve() });
 
-    render(<ExternalApi />);
+    render(<External />);
 
     fireEvent.click(screen.getByTestId('external-action'));
 
@@ -33,7 +33,7 @@ describe('index', () => {
   it('should call the API when the button is clicked', async () => {
     global.fetch = () => ({ json: () => Promise.resolve({ msg: 'Text' }) });
 
-    render(<ExternalApi />);
+    render(<External />);
 
     fireEvent.click(screen.getByTestId('external-action'));
     await waitFor(() => screen.getByTestId('external-result'));
@@ -51,6 +51,6 @@ describe('index', () => {
     await waitFor(() => screen.getByTestId('external-result'));
 
     expect(screen.queryByTestId('loading')).not.toBeInTheDocument();
-    expect(await screen.findByText(/Error/)).toBeInTheDocument();
+    expect(await screen.findByText('Error')).toBeInTheDocument();
   });
 });
