@@ -7,24 +7,20 @@ import ErrorMessage from '../components/ErrorMessage';
 import Highlight from '../components/Highlight';
 
 function External() {
-  const [isLoading, setIsLoading] = useState(false);
-  const [response, setResponse] = useState();
-  const [error, setError] = useState();
+  const [state, setState] = useState({ isLoading: false, response: undefined, error: undefined });
 
   const callApi = async () => {
-    setIsLoading(true);
+    setState(previous => ({ ...previous, isLoading: true }))
 
     try {
       const response = await fetch('/api/shows');
       const data = await response.json();
 
-      setResponse(data);
-      setError(undefined);
+      setState(previous => ({ ...previous, response: data, error: undefined }))
     } catch (error) {
-      setResponse(undefined);
-      setError(error);
+      setState(previous => ({ ...previous, response: undefined, error }))
     } finally {
-      setIsLoading(false);
+      setState(previous => ({ ...previous, isLoading: false }))
     }
   };
 
@@ -33,14 +29,28 @@ function External() {
     fn();
   };
 
+  const { isLoading, response, error } = state;
+
   return (
     <>
       <div className="mb-5" data-testid="external">
         <h1 data-testid="external-title">External API</h1>
-        <p data-testid="external-text">
-          Ping an external API by clicking the button below. This will call the external API using an access token, and
-          the API will validate it using the API's audience value.
-        </p>
+        <div data-testid="external-text">
+          <p className="lead">
+            Ping an external API by clicking the button below
+          </p>
+          <p>
+          This will call a local API on port 3001 that would have been started if you run <code>npm run dev</code>.
+          </p>
+          <p>
+          An access token is sent as part of the request's <code>Authorization</code> header and the API will validate 
+          it using the API's audience value. The audience is the identifier of the API that you want to call (see{" "}
+          <a href="https://auth0.com/docs/get-started/dashboard/tenant-settings#api-authorization-settings">
+            API Authorization Settings
+          </a>{" "}
+          for more info).
+          </p>
+        </div>
         <Button color="primary" className="mt-5" onClick={e => handle(e, callApi)} data-testid="external-action">
           Ping API
         </Button>
