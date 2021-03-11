@@ -1,20 +1,20 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 
 import { withUserProvider, mockUser } from '../fixtures';
 import NavBar from '../../components/NavBar';
 
 describe('NavBar', () => {
   it('should render in logged out state', async () => {
-    render(<NavBar />);
+    render(<NavBar />, { wrapper: withUserProvider({ user: undefined }) });
 
     expect(screen.getByTestId('navbar')).toBeInTheDocument();
     expect(screen.getByTestId('navbar-toggle')).toBeInTheDocument();
     expect(screen.getByTestId('navbar-items')).toBeInTheDocument();
     expect(screen.getByTestId('navbar-items').children).toHaveLength(1);
     expect(screen.getByTestId('navbar-home')).toBeInTheDocument();
-    expect(screen.getByTestId('navbar-login-desktop')).toBeInTheDocument();
-    expect(screen.getByTestId('navbar-login-mobile')).toBeInTheDocument();
+    await waitFor(() => expect(screen.getByTestId('navbar-login-desktop')).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByTestId('navbar-login-mobile')).toBeInTheDocument());
     expect(screen.queryByTestId('navbar-menu-desktop')).not.toBeInTheDocument();
     expect(screen.queryByTestId('navbar-menu-mobile')).not.toBeInTheDocument();
   });

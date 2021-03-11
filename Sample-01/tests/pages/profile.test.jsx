@@ -16,7 +16,7 @@ describe('profile', () => {
   });
 
   it('should render a spinner when the user is loading', async () => {
-    render(<Profile />);
+    render(<Profile />, { wrapper: withUserProvider({ user: undefined }) });
 
     waitFor(() => screen.getByTestId('loading').toBeInTheDocument());
     waitFor(() => screen.queryByTestId('profile').not.toBeInTheDocument());
