@@ -13,8 +13,13 @@ const baseUrl = process.env.AUTH0_BASE_URL;
 const issuerBaseUrl = process.env.AUTH0_ISSUER_BASE_URL;
 const audience = process.env.AUTH0_AUDIENCE;
 
-if (!baseUrl || !issuerBaseUrl || !audience) {
+if (!baseUrl || !issuerBaseUrl) {
   throw new Error('Please make sure that the file .env.local is in place and populated');
+}
+
+if (!audience) {
+  console.log('AUTH0_AUDIENCE not set in .env.local. Shutting down API server.');
+  process.exit(1);
 }
 
 app.use(morgan('dev'));
