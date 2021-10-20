@@ -21,21 +21,17 @@ p code {
   min-height: 170px;
 }
 
-.router-link {
-  cursor: pointer;
-}
-
 .nav-item.dropdown .dropdown-item {
   padding: 0;
 }
 
-.nav-item.dropdown .dropdown-item .router-link {
-  width: 100%;
-  padding: .55rem 1.5rem;
+.nav-item.dropdown .dropdown-item a {
+  color: inherit;
 }
 
-.navbar .router-link-exact-active {
-  margin-bottom: -3px;
+.nav-item.dropdown .dropdown-item .navbar-item {
+  width: 100%;
+  padding: .55rem 1.5rem;
 }
 
 .result-block-container .result-block {
