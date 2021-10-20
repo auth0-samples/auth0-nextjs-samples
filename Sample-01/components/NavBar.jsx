@@ -14,7 +14,8 @@ import {
 } from 'reactstrap';
 import { useUser } from '@auth0/nextjs-auth0';
 
-import RouterLink from './RouterLink';
+import PageLink from './PageLink';
+import AnchorLink from './AnchorLink';
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,26 +31,26 @@ const NavBar = () => {
           <Collapse isOpen={isOpen} navbar>
             <Nav className="mr-auto" navbar data-testid="navbar-items">
               <NavItem>
-                <RouterLink href="/" className="nav-link" testId="navbar-home">
+                <PageLink href="/" className="nav-link" testId="navbar-home">
                   Home
-                </RouterLink>
+                </PageLink>
               </NavItem>
               {user && (
                 <>
                   <NavItem>
-                    <RouterLink href="/csr" className="nav-link" testId="navbar-csr">
+                    <PageLink href="/csr" className="nav-link" testId="navbar-csr">
                       Client-side rendered page
-                    </RouterLink>
+                    </PageLink>
                   </NavItem>
                   <NavItem>
-                    <RouterLink href="/ssr" className="nav-link" testId="navbar-ssr">
+                    <PageLink href="/ssr" className="nav-link" testId="navbar-ssr">
                       Server-side rendered page
-                    </RouterLink>
+                    </PageLink>
                   </NavItem>
                   <NavItem>
-                    <RouterLink href="/external" className="nav-link" testId="navbar-external">
+                    <PageLink href="/external" className="nav-link" testId="navbar-external">
                       External API
-                    </RouterLink>
+                    </PageLink>
                   </NavItem>
                 </>
               )}
@@ -57,13 +58,13 @@ const NavBar = () => {
             <Nav className="d-none d-md-block" navbar>
               {!isLoading && !user && (
                 <NavItem id="qsLoginBtn">
-                  <RouterLink
+                  <AnchorLink
                     href="/api/auth/login"
                     className="btn btn-primary btn-margin"
                     tabIndex={0}
                     testId="navbar-login-desktop">
                     Log in
-                  </RouterLink>
+                  </AnchorLink>
                 </NavItem>
               )}
               {user && (
@@ -84,14 +85,14 @@ const NavBar = () => {
                       {user.name}
                     </DropdownItem>
                     <DropdownItem className="dropdown-profile" tag="span">
-                      <RouterLink href="/profile" icon="user" testId="navbar-profile-desktop">
+                      <PageLink href="/profile" icon="user" testId="navbar-profile-desktop">
                         Profile
-                      </RouterLink>
+                      </PageLink>
                     </DropdownItem>
                     <DropdownItem id="qsLogoutBtn">
-                      <RouterLink href="/api/auth/logout" icon="power-off" testId="navbar-logout-desktop">
+                      <AnchorLink href="/api/auth/logout" icon="power-off" testId="navbar-logout-desktop">
                         Log out
-                      </RouterLink>
+                      </AnchorLink>
                     </DropdownItem>
                   </DropdownMenu>
                 </UncontrolledDropdown>
@@ -99,13 +100,13 @@ const NavBar = () => {
             </Nav>
             {!isLoading && !user && (
               <Nav className="d-md-none" navbar>
-                <RouterLink
+                <AnchorLink
                   href="/api/auth/login"
                   className="btn btn-primary btn-block"
                   tabIndex={0}
                   testId="navbar-login-mobile">
                   Log in
-                </RouterLink>
+                </AnchorLink>
               </Nav>
             )}
             {user && (
@@ -131,18 +132,18 @@ const NavBar = () => {
                   </span>
                 </NavItem>
                 <NavItem>
-                  <RouterLink href="/profile" icon="user" testId="navbar-profile-mobile">
+                  <PageLink href="/profile" icon="user" testId="navbar-profile-mobile">
                     Profile
-                  </RouterLink>
+                  </PageLink>
                 </NavItem>
                 <NavItem id="qsLogoutBtn">
-                  <RouterLink
+                  <AnchorLink
                     href="/api/auth/logout"
                     className="btn btn-link p-0"
                     icon="power-off"
                     testId="navbar-logout-mobile">
                     Log out
-                  </RouterLink>
+                  </AnchorLink>
                 </NavItem>
               </Nav>
             )}

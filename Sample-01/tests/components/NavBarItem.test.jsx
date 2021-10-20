@@ -1,17 +1,17 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-import RouterLink from '../../components/RouterLink';
+import NavBarItem from '../../components/NavBarItem';
 
-describe('RouterLink', () => {
+describe('NavBarItem', () => {
   it('should render without crashing', async () => {
     render(
-      <RouterLink testId="router-link" href="/url">
+      <NavBarItem testId="navbar-item" href="/url">
         Text
-      </RouterLink>
+      </NavBarItem>
     );
 
-    expect(screen.getByTestId('router-link')).toBeInTheDocument();
+    expect(screen.getByTestId('navbar-item')).toBeInTheDocument();
     expect(screen.getByText('Text')).toBeInTheDocument();
   });
 });
