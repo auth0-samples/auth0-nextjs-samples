@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { Row, Col } from 'reactstrap';
 import { useUser, withPageAuthRequired } from '@auth0/nextjs-auth0';
 
@@ -16,11 +17,13 @@ function Profile() {
         <>
           <Row className="align-items-center profile-header mb-5 text-center text-md-left" data-testid="profile">
             <Col md={2}>
-              <img
+              <Image
                 src={user.picture}
                 alt="Profile"
                 className="rounded-circle img-fluid profile-picture mb-3 mb-md-0"
-                decode="async"
+                width="120"
+                height="120"
+                quality="100"
                 data-testid="profile-picture"
               />
             </Col>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Image from 'next/image';
 import {
   Collapse,
   Container,
@@ -70,13 +71,13 @@ const NavBar = () => {
               {user && (
                 <UncontrolledDropdown nav inNavbar data-testid="navbar-menu-desktop">
                   <DropdownToggle nav caret id="profileDropDown">
-                    <img
+                    <Image
                       src={user.picture}
                       alt="Profile"
                       className="nav-user-profile rounded-circle"
                       width="50"
                       height="50"
-                      decode="async"
+                      quality="100"
                       data-testid="navbar-picture-desktop"
                     />
                   </DropdownToggle>
@@ -117,13 +118,13 @@ const NavBar = () => {
                 data-testid="navbar-menu-mobile">
                 <NavItem>
                   <span className="user-info">
-                    <img
+                    <Image
                       src={user.picture}
                       alt="Profile"
                       className="nav-user-profile d-inline-block rounded-circle mr-3"
                       width="50"
                       height="50"
-                      decode="async"
+                      quality="100"
                       data-testid="navbar-picture-mobile"
                     />
                     <h6 className="d-inline-block" data-testid="navbar-user-mobile">

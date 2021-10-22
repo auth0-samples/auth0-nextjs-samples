@@ -21,6 +21,10 @@ p code {
   min-height: 170px;
 }
 
+.nav-item.dropdown .dropdown-toggle::after {
+  display: inline;
+}
+
 .nav-item.dropdown .dropdown-item {
   padding: 0;
 }
