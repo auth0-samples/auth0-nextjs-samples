@@ -27,7 +27,7 @@
     "express-jwt": "^6.1.2",
     "helmet": "^4.3.1",
     "highlight.js": "^11.5.1",
-    "jwks-rsa": "^2.0.3",
+    "jwks-rsa": "^2.1.1",
     "morgan": "^1.10.0",
     "next": "^12.1.6",
     "nodemon": "^2.0.7",
