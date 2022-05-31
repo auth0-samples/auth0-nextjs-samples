@@ -36,7 +36,7 @@
     "reactstrap": "^8.10.1"
   },
   "devDependencies": {
-    "@testing-library/dom": "^8.0.0",
+    "@testing-library/dom": "^8.13.0",
     "@testing-library/jest-dom": "^5.11.8",
     "@testing-library/react": "^12.1.5",
     "babel-jest": "^27.5.1",
