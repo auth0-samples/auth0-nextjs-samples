@@ -6,7 +6,7 @@ export default withApiAuthRequired(async function shows(req, res) {
       scopes: ['read:shows']
     });
     const apiPort = process.env.API_PORT || 3001;
-    const response = await fetch(`http://localhost:${apiPort}/api/shows`, {
+    const response = await fetch(`https://auth0-nextjs-test.vercel.app/api/shows`, {
       headers: {
         Authorization: `Bearer ${accessToken}`
       }
