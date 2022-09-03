@@ -29,7 +29,7 @@
     "highlight.js": "^11.6.0",
     "jwks-rsa": "^2.1.4",
     "morgan": "^1.10.0",
-    "next": "^12.2.4",
+    "next": "^12.2.5",
     "nodemon": "^2.0.19",
     "react": "17.0.2",
     "react-dom": "17.0.2",
