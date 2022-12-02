@@ -17,10 +17,7 @@ jest.mock('next/router', () => ({
 }));
 
 jest.mock('@auth0/nextjs-auth0', () => {
-  const originalModule = jest.requireActual('@auth0/nextjs-auth0');
-
   return {
-    ...originalModule,
     getAccessToken: () => 'access_token',
     withApiAuthRequired: handler => handler,
     withPageAuthRequired: page => () => page()

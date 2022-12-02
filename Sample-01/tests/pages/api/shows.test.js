@@ -1,3 +1,7 @@
+/**
+ * @jest-environment node
+ */
+
 import shows from '../../../pages/api/shows';
 
 const req = jest.fn();

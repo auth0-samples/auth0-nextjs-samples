@@ -1,5 +1,5 @@
 describe('logged out', () => {
-  before(() => cy.visit('/'));
+  beforeEach(() => cy.visit('/'));
 
   context('desktop', () => {
     it('should display the navigation bar', () => {
