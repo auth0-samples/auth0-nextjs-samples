@@ -1,4 +1,4 @@
-import { UserProvider } from '@auth0/nextjs-auth0';
+import { UserProvider } from '@auth0/nextjs-auth0/client';
 
 export const mockUser = {
   email: 'foo@example.com',
