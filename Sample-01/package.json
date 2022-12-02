@@ -49,7 +49,7 @@
     "start-server-and-test": "^1.14.0"
   },
   "jest": {
-    "testEnvironment": "jest-environment-jsdom",
+    "testEnvironment": "jsdom",
     "rootDir": "./",
     "moduleNameMapper": {
       ".(css)$": "identity-obj-proxy"
