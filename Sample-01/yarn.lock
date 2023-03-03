@@ -15,10 +15,10 @@
     "@jridgewell/gen-mapping" "^0.1.0"
     "@jridgewell/trace-mapping" "^0.3.9"
 
-"@auth0/nextjs-auth0@^2.0.0":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@auth0/nextjs-auth0/-/nextjs-auth0-2.0.1.tgz#9cafc0cbe61c9a517e895626b84cb2ce40e14ac6"
-  integrity sha512-jADQlgdktoxzufrrNwTwNhJJ/Wg6XwQmhcQAZ60yyLTfeSHTI5lBg1P7OdkZ9deGp54imVShMUVlUVy8VnIxwg==
+"@auth0/nextjs-auth0@^2.2.2":
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/@auth0/nextjs-auth0/-/nextjs-auth0-2.2.2.tgz#5fac070c402136af968df32a9deb57bf4e7f3d99"
+  integrity sha512-Vo85dFzB9qAwoqxv32uEHo4aaBpb0x5kMnDTT4a2GMX3Hsw8RJOrnrCVdCcNXdQolLOHAA9huK7RMQqLEzInYg==
   dependencies:
     "@panva/hkdf" "^1.0.2"
     cookie "^0.5.0"
