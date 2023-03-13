@@ -7,14 +7,13 @@ module.exports = defineConfig({
   fixturesFolder: false,
   reporter: 'junit',
   reporterOptions: {
-    mochaFile: 'test-results/cypress/junit-[hash].xml',
+    mochaFile: 'test-results/cypress/junit-[hash].xml'
   },
   retries: {
-    runMode: 3,
+    runMode: 3
   },
   e2e: {
     setupNodeEvents(on, config) {},
-    baseUrl: 'http://localhost:3000',
-    experimentalSessionAndOrigin: true,
-  },
-})
+    baseUrl: 'http://localhost:3000'
+  }
+});
