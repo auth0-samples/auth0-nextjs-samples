@@ -37,7 +37,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.5",
-    "@testing-library/dom": "^8.19.0",
+    "@testing-library/dom": "^8.20.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "babel-jest": "^29.3.1",
