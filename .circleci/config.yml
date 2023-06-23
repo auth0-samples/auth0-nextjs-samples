@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  cypress: cypress-io/cypress@3
+
 jobs:
   Sample-01:
     working_directory: ~/samples/Sample-01
@@ -18,7 +21,10 @@ jobs:
             - ~/.cache
       - run: npm run build
       - run: npm test
-      - run: npm run test:integration
+      - cypress/run:
+          cypress-command: npx cypress run --browser chrome
+          install-browsers: true
+          start-command: npm run start
       - store_test_results:
           path: test-results
       - store_artifacts:
