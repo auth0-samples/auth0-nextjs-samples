@@ -8,7 +8,7 @@ if (!EMAIL || !PASSWORD) {
 const login = () => {
   cy.get('input[name=email], input[name=username]').focus().clear().type(EMAIL);
   cy.get('input[name=password]').focus().clear().type(PASSWORD);
-  cy.get('button[name=submit], button[name=action]').click();
+  cy.get('button[type=submit][name=action]:visible, button[type=submit][name=submit]').click();
 };
 
 describe('logged in', () => {
