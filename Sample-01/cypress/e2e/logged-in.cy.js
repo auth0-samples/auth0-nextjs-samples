@@ -20,7 +20,6 @@ describe('logged in', () => {
         cy.get('[data-testid=navbar-login-desktop]').click();
         login();
       });
-
       cy.visit('/');
     });
 
@@ -100,14 +99,13 @@ describe('logged in', () => {
 
   context('mobile', () => {
     beforeEach(() => {
+      cy.mobileViewport();
       cy.session('mobile', () => {
-        cy.mobileViewport();
         cy.visit('/');
         cy.get('[data-testid=navbar-toggle]').click();
         cy.get('[data-testid=navbar-login-mobile]').click();
         login();
       });
-
       cy.visit('/');
     });
 
