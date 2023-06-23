@@ -6,6 +6,7 @@ if (!EMAIL || !PASSWORD) {
 }
 
 const login = () => {
+  Cypress.Cookies.debug(true, {verbose: false}) // now Cypress will log when it alters cookies
   cy.get('input[name=email], input[name=username]').focus().clear().type(EMAIL);
   cy.get('input[name=password]').focus().clear().type(PASSWORD);
   cy.get('button[type=submit][name=action]:visible, button[type=submit][name=submit]').click();
@@ -14,9 +15,13 @@ const login = () => {
 describe('logged in', () => {
   context('desktop', () => {
     beforeEach(() => {
+      cy.session('desktop', () => {
+        cy.visit('/');
+        cy.get('[data-testid=navbar-login-desktop]').click();
+        login();
+      });
+
       cy.visit('/');
-      cy.get('[data-testid=navbar-login-desktop]').click();
-      login();
     });
 
     it('should display the navigation bar', () => {
@@ -95,11 +100,15 @@ describe('logged in', () => {
 
   context('mobile', () => {
     beforeEach(() => {
-      cy.mobileViewport();
+      cy.session('mobile', () => {
+        cy.mobileViewport();
+        cy.visit('/');
+        cy.get('[data-testid=navbar-toggle]').click();
+        cy.get('[data-testid=navbar-login-mobile]').click();
+        login();
+      });
+
       cy.visit('/');
-      cy.get('[data-testid=navbar-toggle]').click();
-      cy.get('[data-testid=navbar-login-mobile]').click();
-      login();
     });
 
     it('should expand the navigation bar menu', () => {
