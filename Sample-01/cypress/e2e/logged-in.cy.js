@@ -14,12 +14,9 @@ const login = () => {
 describe('logged in', () => {
   context('desktop', () => {
     beforeEach(() => {
-      cy.session('desktop', () => {
-        cy.visit('/');
-        cy.get('[data-testid=navbar-login-desktop]').click();
-        login();
-      });
       cy.visit('/');
+      cy.get('[data-testid=navbar-login-desktop]').click();
+      login();
     });
 
     it('should display the navigation bar', () => {
@@ -99,13 +96,10 @@ describe('logged in', () => {
   context('mobile', () => {
     beforeEach(() => {
       cy.mobileViewport();
-      cy.session('mobile', () => {
-        cy.visit('/');
-        cy.get('[data-testid=navbar-toggle]').click();
-        cy.get('[data-testid=navbar-login-mobile]').click();
-        login();
-      });
       cy.visit('/');
+      cy.get('[data-testid=navbar-toggle]').click();
+      cy.get('[data-testid=navbar-login-mobile]').click();
+      login();
     });
 
     it('should expand the navigation bar menu', () => {
