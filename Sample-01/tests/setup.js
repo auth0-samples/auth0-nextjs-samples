@@ -9,14 +9,17 @@ afterEach(() => {
   jest.resetModules();
 });
 
-jest.mock('next/router', () => ({
-  useRouter: () => ({
-    asPath: '/'
-  })
+jest.mock('next/navigation', () => ({
+  usePathname: () => ''
 }));
 
 jest.mock('@auth0/nextjs-auth0', () => {
   return {
+    getSession: () => ({
+      user: {
+        sub: 'bob'
+      }
+    }),
     getAccessToken: () => 'access_token',
     withApiAuthRequired: handler => handler,
     withPageAuthRequired: page => () => page()

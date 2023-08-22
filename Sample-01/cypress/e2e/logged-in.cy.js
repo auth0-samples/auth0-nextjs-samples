@@ -7,8 +7,10 @@ if (!EMAIL || !PASSWORD) {
 
 const login = () => {
   cy.get('input[name=email], input[name=username]').focus().clear().type(EMAIL);
-  cy.get('input[name=password]').focus().clear().type(PASSWORD);
+  cy.get('input[name=password]').focus().clear().type(PASSWORD, { log: false });
   cy.get('button[type=submit][name=action]:visible, button[type=submit][name=submit]').click();
+  cy.url().should('equal', 'http://localhost:3000/');
+  cy.visit('/');
 };
 
 describe('logged in', () => {

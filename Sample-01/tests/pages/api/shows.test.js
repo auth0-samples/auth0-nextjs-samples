@@ -2,7 +2,7 @@
  * @jest-environment node
  */
 
-import shows from '../../../pages/api/shows';
+import { GET as shows } from '../../../app/api/shows/route';
 
 const req = jest.fn();
 const res = (() => {
@@ -20,18 +20,18 @@ describe('/api/shows', () => {
   it('should call the external API', async () => {
     global.fetch = jest.fn().mockReturnValue({ json: () => Promise.resolve({ msg: 'Text' }) });
 
-    await shows(req, res);
+    const res = await shows(req);
 
-    expect(res.status).toHaveBeenCalledWith(200);
-    expect(res.json).toHaveBeenCalledWith({ msg: 'Text' });
+    expect(res.status).toBe(200);
+    await expect(res.json()).resolves.toEqual({ msg: 'Text' });
   });
 
   it('should fail when the external API call fails', async () => {
     global.fetch = jest.fn().mockReturnValue({ json: () => Promise.reject(new Error('Error')) });
 
-    await shows(req, res);
+    const res = await shows(req);
 
-    expect(res.status).toHaveBeenCalledWith(500);
-    expect(res.json).toHaveBeenCalledWith({ error: 'Error' });
+    expect(res.status).toBe(500);
+    await expect(res.json()).resolves.toEqual({ error: 'Error' });
   });
 });
