@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-import Index from '../../pages/index';
+import Index from '../../app/page';
 
 describe('index', () => {
   it('should render without crashing', async () => {

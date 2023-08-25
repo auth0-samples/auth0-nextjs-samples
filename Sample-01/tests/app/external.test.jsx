@@ -1,10 +1,14 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 
-import _External from '../../pages/external';
+import _External from '../../app/external/page';
 import { UserProvider } from '@auth0/nextjs-auth0/client';
 
-const External = () => <UserProvider user={{}}><_External /></UserProvider>
+const External = () => (
+  <UserProvider user={{}}>
+    <_External />
+  </UserProvider>
+);
 
 describe('index', () => {
   afterAll(() => {

@@ -1,7 +1,9 @@
 import { getAccessToken, withApiAuthRequired } from '@auth0/nextjs-auth0';
+import { NextResponse } from 'next/server';
 
-export default withApiAuthRequired(async function shows(req, res) {
+export const GET = withApiAuthRequired(async function shows(req) {
   try {
+    const res = new NextResponse();
     const { accessToken } = await getAccessToken(req, res, {
       scopes: ['read:shows']
     });
@@ -13,8 +15,8 @@ export default withApiAuthRequired(async function shows(req, res) {
     });
     const shows = await response.json();
 
-    res.status(200).json(shows);
+    return NextResponse.json(shows, res);
   } catch (error) {
-    res.status(error.status || 500).json({ error: error.message });
+    return NextResponse.json({ error: error.message }, { status: error.status || 500 });
   }
 });
