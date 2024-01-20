@@ -7,6 +7,14 @@ import Footer from '../components/Footer';
 import React from 'react';
 import { UserProvider } from '@auth0/nextjs-auth0/client';
 
+import '@fortawesome/fontawesome-svg-core/styles.css';
+
+// Force one-time early load of fontawesome and prevent lazy load
+// Icons will no longer display large and then re-render to proper size
+import { config } from '@fortawesome/fontawesome-svg-core';
+
+config.autoAddCss = false; /* eslint-disable import/first */
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
@@ -20,6 +28,8 @@ export default function RootLayout({ children }) {
         <link rel="stylesheet" href="https://cdn.auth0.com/js/auth0-samples-theme/1.0/css/auth0-theme.min.css" />
       </head>
       <body>
+        // Override the RootLayout component to make the authentication 
+        // state available to all pages. Access by using useUser() hook.
         <UserProvider>
           <main id="app" className="d-flex flex-column h-100" data-testid="layout">
             <NavBar />

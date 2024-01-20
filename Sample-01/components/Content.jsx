@@ -1,10 +1,16 @@
 import React from 'react';
 import { Row, Col } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fas } from '@fortawesome/free-solid-svg-icons'
 
 import contentData from '../utils/contentData';
 
+// Without this, a not-found log to console occurs
+library.add(fas);
+
 const Content = () => (
+
   <div className="next-steps my-5" data-testid="content">
     <h2 className="my-5 text-center" data-testid="content-title">
       What can I do next?
