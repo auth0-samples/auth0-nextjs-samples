@@ -39,7 +39,7 @@
     "@babel/core": "^7.23.0",
     "@testing-library/dom": "^9.0.1",
     "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^14.1.0",
+    "@testing-library/react": "^14.2.2",
     "babel-jest": "^29.7.0",
     "cypress": "^12.7.0",
     "identity-obj-proxy": "^3.0.0",
