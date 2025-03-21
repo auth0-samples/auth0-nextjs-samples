@@ -2,9 +2,10 @@
   max-width: 800px;
   margin: 2rem auto;
   padding: 2rem;
-  background-color: var(--card-bg);
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: var(--card-background);
+  border-radius: var(--border-radius);
+  box-shadow: var(--card-shadow);
+  border: 1px solid var(--border);
 }
 
 .profileHeader {
@@ -21,7 +22,7 @@
   height: 100px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid var(--primary);
+  border: 3px solid var(--gray-200);
 }
 
 .profileInfo {
@@ -30,11 +31,13 @@
 
 .profileInfo h1 {
   margin-bottom: 0.5rem;
-  color: var(--foreground);
+  color: var(--primary);
+  font-weight: 600;
+  letter-spacing: -0.025em;
 }
 
 .profileInfo p {
-  color: #666;
+  color: var(--foreground-light);
   margin-bottom: 0.25rem;
 }
 
@@ -44,18 +47,13 @@
 
 .detailCard {
   margin-bottom: 2rem;
-  padding: 1.5rem;
-  background-color: var(--background);
-  border-radius: 0.5rem;
+  padding: 1.75rem;
+  background-color: var(--card-background);
+  border-radius: var(--border-radius);
   border: 1px solid var(--border);
+  transition: all 0.2s ease;
 }
 
-.detailCard h2 {
-  margin-bottom: 1rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 2px solid var(--primary);
-  color: var(--secondary);
-}
 
 .profileActions {
   margin-top: 2rem;
@@ -64,28 +62,40 @@
 }
 
 .logoutButton {
-  display: inline-block;
-  padding: 0.8rem 1.5rem;
-  background-color: var(--secondary);
-  color: white;
-  border-radius: 0.5rem;
+  appearance: none;
+  border-radius: var(--border-radius);
+  padding: 0 16px;
+  height: 40px;
+  font-size: 14px;
   font-weight: 500;
-  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   transition: all 0.2s ease;
+  box-shadow: var(--button-shadow);
+  letter-spacing: -0.01em;
+  background-color: var(--accent);
+  color: white;
 }
 
 .logoutButton:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  background-color: var(--secondary-dark);
-  color: white;
+  background-color: var(--accent-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.logoutButton:active {
+  box-shadow: var(--button-active-shadow);
+  transform: translateY(1px);
 }
 
 .jsonData {
   background-color: #1e1e1e;
   color: #f8f8f8;
   padding: 1rem;
-  border-radius: 0.5rem;
+  border-radius: var(--border-radius);
   overflow-x: auto;
   font-family: var(--font-geist-mono, monospace);
   font-size: 0.9rem;

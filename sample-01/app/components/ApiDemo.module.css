@@ -1,21 +1,17 @@
 .apiDemo {
   background-color: var(--card-background);
-  padding: 1.5rem;
-  border-radius: 0.5rem;
+  padding: 2rem;
+  border-radius: var(--border-radius);
   margin: 2rem 0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--card-shadow);
+  border: 1px solid var(--border);
+  transition: all 0.2s ease;
 }
 
-.apiDemo h2 {
-  margin-top: 0;
-  color: var(--secondary);
-  border-bottom: 2px solid var(--primary);
-  padding-bottom: 0.5rem;
-}
 
 .apiDemo p {
   margin: 1rem 0;
-  color: var(--foreground);
+  color: var(--foreground-light);
   line-height: 1.6;
 }
 
@@ -26,31 +22,46 @@
 }
 
 .button {
-  padding: 0.75rem 1.25rem;
+  appearance: none;
+  border-radius: var(--border-radius);
+  padding: 0 16px;
+  height: 40px;
+  font-size: 14px;
+  font-weight: 500;
+  border: 1px solid transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  box-shadow: var(--button-shadow);
+  letter-spacing: -0.01em;
   background-color: var(--primary);
   color: white;
-  border: none;
-  border-radius: 0.25rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
 }
 
 .button:hover {
-  background-color: var(--primary-dark);
+  background-color: var(--primary-light);
+}
+
+.button:active {
+  box-shadow: var(--button-active-shadow);
+  transform: translateY(1px);
 }
 
 .button:disabled {
-  background-color: var(--border);
+  background-color: var(--gray-300);
   cursor: not-allowed;
+  opacity: 0.6;
+  box-shadow: none;
 }
 
 .errorContainer {
   padding: 1rem;
-  background-color: #fee2e2;
-  border: 1px solid #fecaca;
+  background-color: rgba(220, 38, 38, 0.1);
+  border: 1px solid rgba(220, 38, 38, 0.2);
   margin: 1rem 0;
-  border-radius: 0.25rem;
+  border-radius: var(--border-radius);
 }
 
 .errorMessage {
@@ -60,16 +71,17 @@
 
 .resultContainer {
   background-color: var(--card-background);
-  padding: 1rem;
-  border-radius: 0.25rem;
+  padding: 1.25rem;
+  border-radius: var(--border-radius);
   border: 1px solid var(--border);
+  margin-top: 1.5rem;
 }
 
 .jsonData {
   background-color: #1e1e1e;
   color: #f8f8f8;
   padding: 1rem;
-  border-radius: 0.25rem;
+  border-radius: var(--border-radius);
   overflow-x: auto;
   font-family: var(--font-geist-mono, monospace);
   font-size: 0.9rem;
@@ -84,39 +96,40 @@
   display: block;
   margin-bottom: 0.5rem;
   font-weight: 500;
-  color: var(--foreground);
+  color: var(--foreground-light);
 }
 
 .apiInput {
   width: 100%;
   padding: 0.75rem;
   border: 1px solid var(--border);
-  border-radius: 0.25rem;
+  border-radius: var(--border-radius);
   font-size: 1rem;
   color: var(--foreground);
   background-color: var(--background);
   transition: border-color 0.2s ease;
+  font-family: var(--font-geist-sans, system-ui, -apple-system, sans-serif);
 }
 
 .apiInput:focus {
   outline: none;
   border-color: var(--primary);
-  box-shadow: 0 0 0 2px rgba(99, 93, 255, 0.2);
+  box-shadow: 0 0 0 2px rgba(22, 33, 77, 0.1);
 }
 
 .hint {
   font-size: 0.875rem;
-  color: #666;
+  color: var(--gray-500);
   margin-top: 0.5rem !important;
   font-style: italic;
 }
 
 .secondaryButton {
-  background-color: var(--secondary);
+  background-color: var(--accent);
 }
 
 .secondaryButton:hover {
-  background-color: var(--secondary-dark);
+  background-color: var(--accent-dark);
 }
 
 @media (max-width: 768px) {

@@ -54,9 +54,8 @@ export default function Navbar() {
     <header className="app-header">
       <div className="container">
         <nav>
-          <Link href="/" className="logo">
-            <Logo testId="navbar-logo" />
-            Auth0 Next.js
+          <Link href="/">
+            <Logo></Logo>
           </Link>
           <div className="nav-links">
             <Link 
@@ -98,33 +97,45 @@ export default function Navbar() {
             {!isLoading && (
               <>
                 {user ? (
-                  <div style={{ display: 'flex', alignItems: 'center', marginLeft: '1rem' }}>
+                  <div className="profile-section">
                     {user.picture && (
                       <img
                         src={user.picture}
                         alt="Profile"
                         className="nav-user-profile"
-                        width="45"
-                        height="45"
+                        width="40"
+                        height="40"
                         data-testid="navbar-picture"
                       />
                     )}
-                    <Link 
-                      href="/auth/logout" 
-                      className="auth0-btn"
-                      style={{ marginLeft: '0.5rem' }}
-                    >
-                      Log out
-                    </Link>
+                    <div className="profile-buttons">
+                      <button className="button primary">
+                        <Link 
+                          href="/profile" 
+                          style={{ color: 'inherit', textDecoration: 'none', display: 'inline-flex', width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center' }}
+                        >
+                          View Profile
+                        </Link>
+                      </button>
+                      <button className="button secondary">
+                        <Link 
+                          href="/auth/logout" 
+                          style={{ color: 'inherit', textDecoration: 'none', display: 'inline-flex', width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center' }}
+                        >
+                          Log out
+                        </Link>
+                      </button>
+                    </div>
                   </div>
                 ) : (
-                  <Link 
-                    href="/auth/login" 
-                    className="auth0-btn primary"
-                    style={{ marginLeft: '1rem' }}
-                  >
-                    Log in
-                  </Link>
+                  <button className="button primary" style={{ marginLeft: '1rem' }}>
+                    <Link 
+                      href="/auth/login" 
+                      style={{ color: 'inherit', textDecoration: 'none', display: 'inline-flex', width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center' }}
+                    >
+                      Log in
+                    </Link>
+                  </button>
                 )}
               </>
             )}

@@ -11,7 +11,11 @@ export default async function ProfilePage() {
           <h2>Authentication Required</h2>
           <p>You must be logged in to view this page.</p>
           <div className={styles.profileActions}>
-            <a href="/auth/login" className={styles.logoutButton}>Log In</a>
+            <button className="button">
+              <a href="/auth/login" style={{ color: 'inherit', textDecoration: 'none', display: 'inline-flex', width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center' }}>
+                Log In
+              </a>
+            </button>
           </div>
         </div>
       </div>
@@ -50,7 +54,11 @@ export default async function ProfilePage() {
       </div>
 
       <div className={styles.profileActions}>
-        <a href="/auth/logout" className={styles.logoutButton}>Logout</a>
+        <button className="button">
+          <a href="/auth/logout" style={{ color: 'inherit', textDecoration: 'none', display: 'inline-flex', width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center' }}>
+            Logout
+          </a>
+        </button>
       </div>
     </div>
   );
