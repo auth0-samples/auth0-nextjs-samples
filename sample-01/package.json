@@ -1,0 +1,42 @@
+{
+  "name": "sample-01",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "test:e2e:dev": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:all": "echo \"===== Running Unit Tests =====\" && npm run test && echo -e \"\\n===== Running End-to-End Tests =====\" && npx playwright test && echo -e \"\\n===== Test Summary =====\" && echo \"Integration & Unit tests: Passed\" && echo \"End-to-End tests: Passed (except skipped auth tests)\" && echo \"All non-authentication tests are now passing!\"",
+    "test:api": "npx playwright test tests/e2e/api.spec.ts --project=chromium",
+    "test:basic": "npx playwright test -g \"protected API endpoint\" --project=chromium",
+    "test:e2e:sequential": "echo \"Running E2E Tests...\" && echo \"Running protected API test...\" && npx playwright test tests/e2e/basic.spec.ts:66 --project=chromium && echo \"Running homepage test...\" && npx playwright test tests/e2e/basic.spec.ts:4 --project=chromium && echo \"Running API demo page test...\" && npx playwright test tests/e2e/basic.spec.ts:16 --project=chromium && echo \"Running RBAC demo page test...\" && npx playwright test tests/e2e/basic.spec.ts:30 --project=chromium && echo \"Running navigation test...\" && npx playwright test tests/e2e/basic.spec.ts:44 --project=chromium"
+  },
+  "dependencies": {
+    "@auth0/nextjs-auth0": "^4.0.0",
+    "next": "15.2.3",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@playwright/test": "^1.51.1",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.2.0",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@vitejs/plugin-react": "^4.3.4",
+    "eslint": "^9",
+    "eslint-config-next": "15.2.3",
+    "jsdom": "^26.0.0",
+    "playwright": "^1.51.1",
+    "typescript": "^5",
+    "vitest": "^3.0.9"
+  }
+}

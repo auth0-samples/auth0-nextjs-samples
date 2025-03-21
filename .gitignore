@@ -1,2 +1,12 @@
 # misc
 .DS_Store
+
+# Next.js
+sample-01/.next/
+sample-01/out/
+sample-01/node_modules/
+sample-01/.env
+sample-01/.env.local
+sample-01/.env.development.local
+sample-01/.env.test.local
+sample-01/.env.production.local
