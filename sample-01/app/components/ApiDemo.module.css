@@ -1,0 +1,139 @@
+.apiDemo {
+  background-color: var(--card-background);
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  margin: 2rem 0;
+  box-shadow: var(--card-shadow);
+  border: 1px solid var(--border);
+  transition: all 0.2s ease;
+}
+
+
+.apiDemo p {
+  margin: 1rem 0;
+  color: var(--foreground-light);
+  line-height: 1.6;
+}
+
+.buttonContainer {
+  display: flex;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.button {
+  appearance: none;
+  border-radius: var(--border-radius);
+  padding: 0 16px;
+  height: 40px;
+  font-size: 14px;
+  font-weight: 500;
+  border: 1px solid transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  box-shadow: var(--button-shadow);
+  letter-spacing: -0.01em;
+  background-color: var(--primary);
+  color: white;
+}
+
+.button:hover {
+  background-color: var(--primary-light);
+}
+
+.button:active {
+  box-shadow: var(--button-active-shadow);
+  transform: translateY(1px);
+}
+
+.button:disabled {
+  background-color: var(--gray-300);
+  cursor: not-allowed;
+  opacity: 0.6;
+  box-shadow: none;
+}
+
+.errorContainer {
+  padding: 1rem;
+  background-color: rgba(220, 38, 38, 0.1);
+  border: 1px solid rgba(220, 38, 38, 0.2);
+  margin: 1rem 0;
+  border-radius: var(--border-radius);
+}
+
+.errorMessage {
+  color: #dc2626;
+  margin: 0;
+}
+
+.resultContainer {
+  background-color: var(--card-background);
+  padding: 1.25rem;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border);
+  margin-top: 1.5rem;
+}
+
+.jsonData {
+  background-color: #1e1e1e;
+  color: #f8f8f8;
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  overflow-x: auto;
+  font-family: var(--font-geist-mono, monospace);
+  font-size: 0.9rem;
+}
+
+/* Styles for the API demo */
+.inputGroup {
+  margin: 1.5rem 0;
+}
+
+.inputGroup label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--foreground-light);
+}
+
+.apiInput {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  color: var(--foreground);
+  background-color: var(--background);
+  transition: border-color 0.2s ease;
+  font-family: var(--font-geist-sans, system-ui, -apple-system, sans-serif);
+}
+
+.apiInput:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(22, 33, 77, 0.1);
+}
+
+.hint {
+  font-size: 0.875rem;
+  color: var(--gray-500);
+  margin-top: 0.5rem !important;
+  font-style: italic;
+}
+
+.secondaryButton {
+  background-color: var(--accent);
+}
+
+.secondaryButton:hover {
+  background-color: var(--accent-dark);
+}
+
+@media (max-width: 768px) {
+  .buttonContainer {
+    flex-direction: column;
+  }
+} 
