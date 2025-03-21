@@ -5,9 +5,11 @@ export default async function Home() {
   const session = await auth0.getSession();
 
   return (
-    <main className={styles.main}>
+    <div className={styles.container}>
       <div className={styles.hero}>
-        <h1 className={styles.title}>Next.js Auth0 Sample</h1>
+        <h1 className={styles.title}>
+          <span style={{ color: 'var(--secondary)' }}>Auth0</span> + <span style={{ color: 'var(--primary)' }}>Next.js</span>
+        </h1>
         <p className={styles.description}>
           A minimal implementation of Auth0 v4 with Next.js 15+
         </p>
@@ -17,22 +19,22 @@ export default async function Home() {
             <div className={styles.loggedIn}>
               <p>Welcome, {session.user.name || 'User'}</p>
               <div className={styles.buttons}>
-                <a href="/profile" className={styles.buttonPrimary}>
+                <a href="/profile" className="auth0-btn primary">
                   View Profile
                 </a>
-                <a href="/auth/logout" className={styles.buttonSecondary}>
-                  Logout
+                <a href="/auth/logout" className="auth0-btn" style={{ marginLeft: '10px' }}>
+                  Log Out
                 </a>
               </div>
             </div>
           ) : (
             <div className={styles.loggedOut}>
               <div className={styles.buttons}>
-                <a href="/auth/login?screen_hint=signup" className={styles.buttonPrimary}>
+                <a href="/auth/login?screen_hint=signup" className="auth0-btn primary">
                   Sign Up
                 </a>
-                <a href="/auth/login" className={styles.buttonSecondary}>
-                  Login
+                <a href="/auth/login" className="auth0-btn" style={{ marginLeft: '10px' }}>
+                  Log In
                 </a>
               </div>
             </div>
@@ -61,6 +63,6 @@ export default async function Home() {
           </ul>
         </div>
       </div>
-    </main>
+    </div>
   );
 } 

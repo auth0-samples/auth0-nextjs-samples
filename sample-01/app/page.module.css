@@ -1,9 +1,8 @@
-.main {
+.container {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 2rem;
-  min-height: 100vh;
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -17,9 +16,7 @@
 .title {
   font-size: 3rem;
   margin-bottom: 1rem;
-  background: linear-gradient(90deg, #ff6b6b, #4ecdc4);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  font-weight: 700;
 }
 
 .description {
@@ -89,6 +86,7 @@
   width: 300px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
+  border-top: 4px solid var(--primary);
 }
 
 .featureCard:hover {
@@ -98,8 +96,8 @@
 
 .featureCard h2 {
   margin-top: 0;
-  color: #333;
-  border-bottom: 2px solid #4ecdc4;
+  color: var(--secondary);
+  border-bottom: 2px solid var(--primary);
   padding-bottom: 0.5rem;
   margin-bottom: 1rem;
 }

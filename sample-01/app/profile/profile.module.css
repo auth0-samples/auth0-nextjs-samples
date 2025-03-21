@@ -54,7 +54,7 @@
   margin-bottom: 1rem;
   padding-bottom: 0.5rem;
   border-bottom: 2px solid var(--primary);
-  color: var(--foreground);
+  color: var(--secondary);
 }
 
 .profileActions {
@@ -77,7 +77,7 @@
 .logoutButton:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  background-color: #ff5252;
+  background-color: var(--secondary-dark);
   color: white;
 }
 

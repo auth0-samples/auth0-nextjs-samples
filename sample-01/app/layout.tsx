@@ -15,7 +15,10 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Auth0 Next.js Sample",
-  description: "A sample application showing Auth0 integration with Next.js",
+  description: "Learn how to integrate Auth0 with Next.js",
+  icons: {
+    icon: "/favicon.ico",
+  }
 };
 
 // Headers have been moved to app/headers.ts file
@@ -27,14 +30,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="stylesheet" href="https://cdn.auth0.com/js/auth0-samples-theme/1.0/css/auth0-theme.min.css" />
+      </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <Navbar />
-        <main>
+        <main className="container">
           {children}
         </main>
         <footer className="app-footer">
           <div className="container">
-            <p>&copy; {new Date().getFullYear()} Auth0 Next.js Sample</p>
+            <p>
+              <span>© {new Date().getFullYear()} Auth0 Inc. All Rights Reserved.</span>
+            </p>
           </div>
         </footer>
       </body>

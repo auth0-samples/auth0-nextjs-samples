@@ -6,10 +6,10 @@
   
   --foreground: #333333;
   --background: #ffffff;
-  --primary: #4ecdc4;
-  --primary-dark: #3dbcb5;
-  --secondary: #ff6b6b;
-  --secondary-dark: #ff5252;
+  --primary: #635dff;
+  --primary-dark: #4f49d1;
+  --secondary: #eb5424;
+  --secondary-dark: #ca481e;
   --border: #e5e5e5;
   --card-background: #ffffff;
   --card-bg: #ffffff;
@@ -26,6 +26,8 @@ body {
   max-width: 100vw;
   overflow-x: hidden;
   font-family: var(--font-geist-sans, sans-serif);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
@@ -36,6 +38,17 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+code {
+  white-space: pre-wrap; 
+  word-break: break-all; 
+  font-family: var(--font-geist-mono, monospace);
+}
+
+p code {
+  color: var(--secondary);
+  font-weight: 600;
 }
 
 /* Header styles */
@@ -64,6 +77,14 @@ a {
   font-weight: bold;
   font-size: 1.25rem;
   color: var(--primary);
+  display: flex;
+  align-items: center;
+}
+
+.app-header .logo svg {
+  width: 82px;
+  height: auto;
+  margin-right: 10px;
 }
 
 .app-header .nav-links {
@@ -87,6 +108,30 @@ a {
   border-bottom-color: var(--primary);
 }
 
+/* Auth0 brand styling */
+.auth0-btn {
+  background-color: var(--secondary);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.auth0-btn:hover {
+  background-color: var(--secondary-dark);
+}
+
+.auth0-btn.primary {
+  background-color: var(--primary);
+}
+
+.auth0-btn.primary:hover {
+  background-color: var(--primary-dark);
+}
+
 /* Footer styles */
 .app-footer {
   background-color: #2b2d42;
@@ -106,6 +151,14 @@ a {
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 0 1rem;
+}
+
+/* User profile styles */
+.nav-user-profile {
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  object-fit: cover;
 }
 
 /* Base styles for form elements */
