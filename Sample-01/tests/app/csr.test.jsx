@@ -1,15 +1,15 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { UserProvider } from '@auth0/nextjs-auth0/client';
+import { Auth0Provider } from '@auth0/nextjs-auth0';
 
 import CSRPage from '../../app/csr/page';
 
 describe('csr', () => {
   it('should render without crashing', async () => {
     render(
-      <UserProvider user={{}}>
+      <Auth0Provider user={{}}>
         <CSRPage />
-      </UserProvider>
+      </Auth0Provider>
     );
 
     expect(screen.getByTestId('csr')).toBeInTheDocument();

@@ -14,7 +14,7 @@ import {
   DropdownMenu,
   DropdownItem
 } from 'reactstrap';
-import { useUser } from '@auth0/nextjs-auth0/client';
+import { useUser } from '@auth0/nextjs-auth0';
 
 import PageLink from './PageLink';
 import AnchorLink from './AnchorLink';
@@ -61,7 +61,7 @@ const NavBar = () => {
               {!isLoading && !user && (
                 <NavItem id="qsLoginBtn">
                   <AnchorLink
-                    href="/api/auth/login"
+                    href="/auth/login"
                     className="btn btn-primary btn-margin"
                     tabIndex={0}
                     testId="navbar-login-desktop">
@@ -92,7 +92,7 @@ const NavBar = () => {
                       </PageLink>
                     </DropdownItem>
                     <DropdownItem id="qsLogoutBtn">
-                      <AnchorLink href="/api/auth/logout" icon="power-off" testId="navbar-logout-desktop">
+                      <AnchorLink href="/auth/logout" icon="power-off" testId="navbar-logout-desktop">
                         Log out
                       </AnchorLink>
                     </DropdownItem>
@@ -103,7 +103,7 @@ const NavBar = () => {
             {!isLoading && !user && (
               <Nav className="d-md-none" navbar>
                 <AnchorLink
-                  href="/api/auth/login"
+                  href="/auth/login"
                   className="btn btn-primary btn-block"
                   tabIndex={0}
                   testId="navbar-login-mobile">
@@ -140,7 +140,7 @@ const NavBar = () => {
                 </NavItem>
                 <NavItem id="qsLogoutBtn">
                   <AnchorLink
-                    href="/api/auth/logout"
+                    href="/auth/logout"
                     className="btn btn-link p-0"
                     icon="power-off"
                     testId="navbar-logout-mobile">

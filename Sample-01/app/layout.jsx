@@ -5,7 +5,10 @@ import NavBar from '../components/NavBar';
 import { Container } from 'reactstrap';
 import Footer from '../components/Footer';
 import React from 'react';
-import { UserProvider } from '@auth0/nextjs-auth0/client';
+import initFontAwesome from '../utils/initFontAwesome';
+
+// Initialize FontAwesome icons
+initFontAwesome();
 
 export default function RootLayout({ children }) {
   return (
@@ -20,13 +23,11 @@ export default function RootLayout({ children }) {
         <link rel="stylesheet" href="https://cdn.auth0.com/js/auth0-samples-theme/1.0/css/auth0-theme.min.css" />
       </head>
       <body>
-        <UserProvider>
           <main id="app" className="d-flex flex-column h-100" data-testid="layout">
             <NavBar />
             <Container className="flex-grow-1 mt-5">{children}</Container>
             <Footer />
           </main>
-        </UserProvider>
       </body>
     </html>
   );
