@@ -1,15 +1,30 @@
-import { Auth0Provider } from '@auth0/nextjs-auth0';
+import React from 'react';
+import { useUser } from '@auth0/nextjs-auth0/client';
 
+// Mock user with all required properties
 export const mockUser = {
-  email: 'foo@example.com',
-  email_verified: true,
-  name: 'foo',
-  nickname: 'foo',
-  picture: 'foo.jpg',
-  sub: '1',
-  updated_at: null
+  name: 'Test User',
+  email: 'test@example.com',
+  picture: 'https://example.com/picture.jpg',
+  sub: 'auth0|123456789',
+  nickname: 'testuser',
+  updated_at: '2023-01-01T00:00:00.000Z',
 };
 
-export const withAuth0Provider = ({ user, profileUrl } = {}) => {
-  return props => <Auth0Provider {...props} user={user} profileUrl={profileUrl} />;
+// This will override the useUser hook and return customized values for tests
+export const withUserProvider = ({ user, isLoading = false }) => {
+  // Mock the useUser hook for the specific test
+  useUser.mockImplementation(() => {
+    return {
+      user,
+      isLoading,
+      error: null,
+    };
+  });
+
+  return ({ children }) => (
+    <div data-testid="user-provider">
+      {children}
+    </div>
+  );
 };
