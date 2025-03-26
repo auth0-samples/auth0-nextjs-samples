@@ -1,22 +1,45 @@
-import { getAccessToken, withApiAuthRequired } from '@auth0/nextjs-auth0';
+import { auth0 } from '../../../lib/auth0';
 import { NextResponse } from 'next/server';
 
-export const GET = withApiAuthRequired(async function shows(req) {
+export async function GET(req) {
   try {
-    const res = new NextResponse();
-    const { accessToken } = await getAccessToken(req, res, {
-      scopes: ['read:shows']
-    });
+    // Check if user is authenticated
+    const session = await auth0.getSession();
+    if (!session) {
+      return NextResponse.json(
+        { error: 'Not authenticated' },
+        { status: 401 }
+      );
+    }
+
+    const accessToken = await auth0.getAccessToken();
+    // console.log('Access token:', accessToken);
+  
     const apiPort = process.env.API_PORT || 3001;
-    const response = await fetch(`http://localhost:${apiPort}/api/shows`, {
+    const apiUrl = `http://localhost:${apiPort}/api/shows`;    
+    
+    const response = await fetch(apiUrl, {
       headers: {
-        Authorization: `Bearer ${accessToken}`
+        'Authorization': `Bearer ${accessToken.token}`
       }
     });
+    
+    // Check if response is unsuccessful
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('API response error:', response.status, errorText);
+      return NextResponse.json(
+        { error: `API error: ${response.status}` }, 
+        { status: response.status }
+      );
+    }
+  
+
     const shows = await response.json();
 
-    return NextResponse.json(shows, res);
+    return NextResponse.json(shows);
   } catch (error) {
+    console.error('Auth0 or API error:', error);
     return NextResponse.json({ error: error.message }, { status: error.status || 500 });
   }
-});
+}

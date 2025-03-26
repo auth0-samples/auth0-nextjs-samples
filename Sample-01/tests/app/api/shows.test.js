@@ -2,36 +2,79 @@
  * @jest-environment node
  */
 
+import { NextResponse } from 'next/server';
 import { GET as shows } from '../../../app/api/shows/route';
 
-const req = jest.fn();
-const res = (() => {
-  const mock = {};
-  mock.status = jest.fn().mockReturnValue(mock);
-  mock.json = jest.fn().mockReturnValue(mock);
-  return mock;
-})();
+// Mock Next.js Response and auth0
+jest.mock('next/server', () => ({
+  NextResponse: {
+    json: jest.fn((data, options) => ({
+      status: options?.status || 200,
+      json: () => Promise.resolve(data)
+    }))
+  }
+}));
+
+// Mock auth0 module before importing the route handler
+jest.mock('../../../lib/auth0', () => ({
+  auth0: {
+    getSession: jest.fn().mockResolvedValue({ user: { sub: 'test-user' } }),
+    getAccessToken: jest.fn().mockResolvedValue({ token: 'test-token' })
+  }
+}));
+
+// Create a mock request
+const mockRequest = () => {
+  return {};
+};
 
 describe('/api/shows', () => {
+  beforeEach(() => {
+    // Reset all mocks before each test
+    jest.clearAllMocks();
+  });
+
   afterAll(() => {
     delete global.fetch;
   });
 
   it('should call the external API', async () => {
-    global.fetch = jest.fn().mockReturnValue({ json: () => Promise.resolve({ msg: 'Text' }) });
+    // Mock the fetch response
+    global.fetch = jest.fn().mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve({ msg: 'Text' }),
+      text: () => Promise.resolve('Text response')
+    });
 
-    const res = await shows(req);
+    // Call the API route
+    const response = await shows(mockRequest());
 
-    expect(res.status).toBe(200);
-    await expect(res.json()).resolves.toEqual({ msg: 'Text' });
+    // Verify response
+    expect(response.status).toBe(200);
+    await expect(response.json()).resolves.toEqual({ msg: 'Text' });
+    
+    // Verify fetch was called with the token
+    expect(global.fetch).toHaveBeenCalledWith(
+      expect.stringContaining('/api/shows'),
+      expect.objectContaining({
+        headers: { Authorization: 'Bearer test-token' }
+      })
+    );
   });
 
   it('should fail when the external API call fails', async () => {
-    global.fetch = jest.fn().mockReturnValue({ json: () => Promise.reject(new Error('Error')) });
+    // Mock fetch to return error response
+    global.fetch = jest.fn().mockResolvedValue({
+      ok: false,
+      status: 500,
+      text: () => Promise.resolve('Error response text')
+    });
 
-    const res = await shows(req);
+    // Call the API route
+    const response = await shows(mockRequest());
 
-    expect(res.status).toBe(500);
-    await expect(res.json()).resolves.toEqual({ error: 'Error' });
+    // Verify response
+    expect(response.status).toBe(500);
+    await expect(response.json()).resolves.toEqual({ error: 'API error: 500' });
   });
 });

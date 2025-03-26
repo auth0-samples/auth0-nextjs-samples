@@ -9,32 +9,32 @@ const jwksRsa = require('jwks-rsa');
 
 const app = express();
 const port = process.env.API_PORT || 3001;
-const baseUrl = process.env.AUTH0_BASE_URL;
-const issuerBaseUrl = process.env.AUTH0_ISSUER_BASE_URL;
-const audience = process.env.AUTH0_AUDIENCE;
+const baseUrl = process.env.APP_BASE_URL;
+const domain = process.env.AUTH0_DOMAIN;
 
-if (!baseUrl || !issuerBaseUrl) {
+if (!baseUrl) {
   throw new Error('Please make sure that the file .env.local is in place and populated');
-}
-
-if (!audience) {
-  console.log('AUTH0_AUDIENCE not set in .env.local. Shutting down API server.');
-  process.exit(1);
 }
 
 app.use(morgan('dev'));
 app.use(helmet());
 app.use(cors({ origin: baseUrl }));
 
+app.use((req, res, next) => {
+  console.log('Authorization header:', req.headers.authorization);
+  next();
+});
+
+
 const checkJwt = jwt({
   secret: jwksRsa.expressJwtSecret({
     cache: true,
     rateLimit: true,
     jwksRequestsPerMinute: 5,
-    jwksUri: `${issuerBaseUrl}/.well-known/jwks.json`
+    jwksUri: `https://${domain}/.well-known/jwks.json`
   }),
-  audience: audience,
-  issuer: `${issuerBaseUrl}/`,
+  audience: `https://${domain}/api/v2/`,
+  issuer: `https://${domain}/`,
   algorithms: ['RS256']
 });
 

@@ -2,14 +2,17 @@
 
 import React, { useState } from 'react';
 import { Button } from 'reactstrap';
-import { withPageAuthRequired } from '@auth0/nextjs-auth0/client';
-
+import useAuthGuard from '../../hooks/useAuthGuard';
+import Highlight from '../../components/Highlight';
 import Loading from '../../components/Loading';
 import ErrorMessage from '../../components/ErrorMessage';
-import Highlight from '../../components/Highlight';
 
-function External() {
+export default function External() {
+  const { isAuthenticated, user, guardComponent } = useAuthGuard();
   const [state, setState] = useState({ isLoading: false, response: undefined, error: undefined });
+
+  // If not authenticated or loading, show guard component
+  if (!isAuthenticated) return guardComponent;
 
   const callApi = async () => {
     setState(previous => ({ ...previous, isLoading: true }));
@@ -68,8 +71,3 @@ function External() {
     </>
   );
 }
-
-export default withPageAuthRequired(External, {
-  onRedirecting: () => <Loading />,
-  onError: error => <ErrorMessage>{error.message}</ErrorMessage>
-});

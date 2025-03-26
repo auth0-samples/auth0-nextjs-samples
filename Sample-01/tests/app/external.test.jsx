@@ -2,13 +2,14 @@ import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 
 import _External from '../../app/external/page';
-import { UserProvider } from '@auth0/nextjs-auth0/client';
 
-const External = () => (
-  <UserProvider user={{}}>
-    <_External />
-  </UserProvider>
-);
+// Mock the external page component directly without wrapping in Auth0Provider
+jest.mock('../../app/external/page', () => {
+  const OriginalExternal = jest.requireActual('../../app/external/page').default;
+  return function MockedExternal(props) {
+    return <OriginalExternal {...props} />;
+  };
+});
 
 describe('index', () => {
   afterAll(() => {
@@ -16,7 +17,7 @@ describe('index', () => {
   });
 
   it('should render without crashing', async () => {
-    render(<External />);
+    render(<_External />);
 
     expect(screen.queryByTestId('loading')).not.toBeInTheDocument();
     expect(screen.getByTestId('external')).toBeInTheDocument();
@@ -29,7 +30,7 @@ describe('index', () => {
   it('should render a spinner when the button is clicked', async () => {
     global.fetch = () => ({ json: () => Promise.resolve() });
 
-    render(<External />);
+    render(<_External />);
 
     fireEvent.click(screen.getByTestId('external-action'));
 
@@ -40,7 +41,7 @@ describe('index', () => {
   it('should call the API when the button is clicked', async () => {
     global.fetch = () => ({ json: () => Promise.resolve({ msg: 'Text' }) });
 
-    render(<External />);
+    render(<_External />);
 
     fireEvent.click(screen.getByTestId('external-action'));
     await waitFor(() => screen.getByTestId('external-result'));
@@ -52,7 +53,7 @@ describe('index', () => {
   it('should render an error when the API call fails', async () => {
     global.fetch = () => ({ json: () => Promise.reject(new Error('Error')) });
 
-    render(<External />);
+    render(<_External />);
 
     fireEvent.click(screen.getByTestId('external-action'));
     await waitFor(() => screen.getByTestId('external-result'));

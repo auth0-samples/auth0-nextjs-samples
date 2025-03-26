@@ -1,27 +1,28 @@
-import '@testing-library/jest-dom/extend-expect';
-
-import initFontAwesome from '../utils/initFontAwesome';
+import '@testing-library/jest-dom';
+import initFontAwesome from '../utils/initFontAwesome.js';
 
 initFontAwesome();
 
-afterEach(() => {
+beforeEach(() => {
   jest.clearAllMocks();
-  jest.resetModules();
 });
 
 jest.mock('next/navigation', () => ({
-  usePathname: () => ''
+  usePathname: jest.fn(() => ''),
+  useRouter: jest.fn(() => ({
+    push: jest.fn(),
+    replace: jest.fn(),
+    prefetch: jest.fn(),
+    back: jest.fn()
+  })),
 }));
 
-jest.mock('@auth0/nextjs-auth0', () => {
-  return {
-    getSession: () => ({
-      user: {
-        sub: 'bob'
-      }
-    }),
-    getAccessToken: () => 'access_token',
-    withApiAuthRequired: handler => handler,
-    withPageAuthRequired: page => () => page()
-  };
-});
+// Define a global fetch mock
+global.fetch = jest.fn(() => 
+  Promise.resolve({
+    json: () => Promise.resolve({}),
+  })
+);
+
+// We're now using moduleNameMapper in package.json for Auth0 mocks
+// No need to mock Auth0 here
