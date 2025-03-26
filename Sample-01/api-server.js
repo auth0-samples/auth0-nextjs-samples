@@ -33,7 +33,7 @@ const checkJwt = jwt({
     jwksRequestsPerMinute: 5,
     jwksUri: `https://${domain}/.well-known/jwks.json`
   }),
-  audience: '',
+  audience: `https://${domain}/api/v2/`,
   issuer: `https://${domain}/`,
   algorithms: ['RS256']
 });
