@@ -65,7 +65,7 @@ cd my-auth0-app
 Install the Auth0 Next.js SDK v4:
 
 ```bash
-npm install @auth0/nextjs-auth0@4.0.0
+npm install @auth0/nextjs-auth0@4.2.0
 ```
 
 ### Step 3: Set Up Auth0 Configuration
@@ -76,24 +76,23 @@ npm install @auth0/nextjs-auth0@4.0.0
    - Choose "Regular Web Application" as the application type
 
 2. **Configure Auth0 application settings**:
-   - Set the "Allowed Callback URLs" to `http://localhost:3000/api/auth/callback`
+   - Set the "Allowed Callback URLs" to `http://localhost:3000/auth/callback`
    - Set the "Allowed Logout URLs" to `http://localhost:3000`
    - Set the "Allowed Web Origins" to `http://localhost:3000`
 
 3. **Create the environment variables file**:
    - Create a `.env.local` file in your project root with the following variables:
 
+
    ```sh
    # A long secret value used to encrypt the session cookie
-   AUTH0_SECRET=$(openssl rand -hex 32)
-   # Your Auth0 application's Client ID
-   AUTH0_CLIENT_ID=your_client_id
-   # Your Auth0 application's Client Secret
-   AUTH0_CLIENT_SECRET=your_client_secret
-   # Your Auth0 tenant domain
-   AUTH0_DOMAIN=your_domain.auth0.com
+   AUTH0_SECRET='LONG_RANDOM_VALUE'
    # The base url of your application
-   APP_BASE_URL=http://localhost:3000
+   APP_BASE_URL='http://localhost:3000'
+   # Your Auth0 application's Client ID
+   AUTH0_CLIENT_ID='YOUR_AUTH0_CLIENT_ID'
+   # Your Auth0 application's Client Secret
+   AUTH0_CLIENT_SECRET='YOUR_AUTH0_CLIENT_SECRET'
    ```
 
 ### Step 4: Initialize the Auth0 Client
@@ -140,44 +139,7 @@ export const config = {
 
 This middleware will handle authentication for all routes except static assets.
 
-### Step 6: Create Auth Routes
-
-Create the login, logout, and callback route handlers in the App Router:
-
-1. **Create the login API route** at `app/api/auth/login/route.ts`:
-
-```typescript
-import { auth0 } from "../../../../lib/auth0";
-import { NextResponse } from "next/server";
-
-export const GET = async () => {
-  return await auth0.login();
-};
-```
-
-2. **Create the logout API route** at `app/api/auth/logout/route.ts`:
-
-```typescript
-import { auth0 } from "../../../../lib/auth0";
-import { NextResponse } from "next/server";
-
-export const GET = async () => {
-  return await auth0.logout();
-};
-```
-
-3. **Create the callback API route** at `app/api/auth/callback/route.ts`:
-
-```typescript
-import { auth0 } from "../../../../lib/auth0";
-import { NextResponse } from "next/server";
-
-export const GET = async (req) => {
-  return await auth0.callback();
-};
-```
-
-### Step 7: Create a Profile Page
+### Step 6: Create a Profile Page
 
 Create a profile page to display user information at `app/profile/page.tsx`:
 
@@ -206,7 +168,7 @@ export default async function ProfilePage() {
 }
 ```
 
-### Step 8: Create Navigation Component
+### Step 7: Create Navigation Component
 
 Create a navigation component with login/logout buttons at `components/NavBar.tsx`:
 
@@ -242,7 +204,7 @@ export default async function NavBar() {
 }
 ```
 
-### Step 9: Integrate API Access (Optional)
+### Step 8: Integrate API Access (Optional)
 
 If you want to access an external API with the user's access token, create an API route:
 
@@ -278,7 +240,7 @@ export async function GET(req) {
 }
 ```
 
-### Step 10: Update Root Layout
+### Step 9: Update Root Layout
 
 Add the NavBar to your root layout at `app/layout.tsx`:
 
@@ -323,8 +285,6 @@ This sample has been updated to use Auth0 NextJS SDK v4, which includes several 
 2. **Middleware-based Protection**: Route protection now uses Next.js middleware instead of higher-order components or hooks for server-side protection.
 
 3. **App Router Support**: The sample now works with Next.js App Router, with API routes implemented as route handlers.
-
-4. **TypeScript Support**: The sample uses TypeScript for improved type safety.
 
 5. **Environment Variables**: The configuration has been simplified with the required environment variables loaded automatically.
 

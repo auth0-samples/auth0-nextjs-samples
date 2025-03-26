@@ -16,7 +16,7 @@
     "cypress:open": "cypress open --browser chrome"
   },
   "dependencies": {
-    "@auth0/nextjs-auth0": "^3.0.0-alpha.0",
+    "@auth0/nextjs-auth0": "^4.2.1",
     "@babel/runtime": "^7.26.10",
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
