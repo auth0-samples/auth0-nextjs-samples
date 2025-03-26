@@ -20,17 +20,18 @@ class Auth0Client {
 }
 
 // Export for server components and API routes
-module.exports = {
-  Auth0Client,
-  auth0: new Auth0Client({}),
-  withApiAuthRequired: (handler) => handler,
-  withPageAuthRequired: (component) => component,
-  getSession: () => Promise.resolve({
-    user: {
-      sub: 'user123',
-      name: 'Test User',
-      email: 'test@example.com'
-    }
-  }),
-  getAccessToken: () => Promise.resolve('mocked-access-token')
-}; 
+export {
+  Auth0Client
+};
+
+export const auth0 = new Auth0Client({});
+export const withApiAuthRequired = (handler) => handler;
+export const withPageAuthRequired = (component) => component;
+export const getSession = () => Promise.resolve({
+  user: {
+    sub: 'user123',
+    name: 'Test User',
+    email: 'test@example.com'
+  }
+});
+export const getAccessToken = () => Promise.resolve('mocked-access-token'); 
