@@ -1,4 +1,4 @@
-import { faLink, faPowerOff, faUser } from '@fortawesome/free-solid-svg-icons';
+const { faLink, faPowerOff, faUser } = require('@fortawesome/free-solid-svg-icons');
 const { library } = require('@fortawesome/fontawesome-svg-core');
 
 function initFontAwesome() {
@@ -7,4 +7,4 @@ function initFontAwesome() {
   library.add(faPowerOff);
 }
 
-export default initFontAwesome;
+module.exports = initFontAwesome;

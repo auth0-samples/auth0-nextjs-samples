@@ -19,7 +19,7 @@ jest.mock('next/server', () => ({
 jest.mock('../../../lib/auth0', () => ({
   auth0: {
     getSession: jest.fn().mockResolvedValue({ user: { sub: 'test-user' } }),
-    getAccessToken: jest.fn().mockResolvedValue({ accessToken: 'test-token' })
+    getAccessToken: jest.fn().mockResolvedValue({ token: 'test-token' })
   }
 }));
 
@@ -41,7 +41,9 @@ describe('/api/shows', () => {
   it('should call the external API', async () => {
     // Mock the fetch response
     global.fetch = jest.fn().mockResolvedValue({
-      json: () => Promise.resolve({ msg: 'Text' })
+      ok: true,
+      json: () => Promise.resolve({ msg: 'Text' }),
+      text: () => Promise.resolve('Text response')
     });
 
     // Call the API route
@@ -61,15 +63,18 @@ describe('/api/shows', () => {
   });
 
   it('should fail when the external API call fails', async () => {
-    // Mock fetch to throw an error
-    const mockError = new Error('Error');
-    global.fetch = jest.fn().mockRejectedValue(mockError);
+    // Mock fetch to return error response
+    global.fetch = jest.fn().mockResolvedValue({
+      ok: false,
+      status: 500,
+      text: () => Promise.resolve('Error response text')
+    });
 
     // Call the API route
     const response = await shows(mockRequest());
 
     // Verify response
     expect(response.status).toBe(500);
-    await expect(response.json()).resolves.toEqual({ error: 'Error' });
+    await expect(response.json()).resolves.toEqual({ error: 'API error: 500' });
   });
 });

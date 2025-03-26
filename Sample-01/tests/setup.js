@@ -1,6 +1,6 @@
-import '@testing-library/jest-dom';
+require('@testing-library/jest-dom');
 
-import initFontAwesome from '../utils/initFontAwesome';
+const initFontAwesome = require('../utils/initFontAwesome');
 
 initFontAwesome();
 

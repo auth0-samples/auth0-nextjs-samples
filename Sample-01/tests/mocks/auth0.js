@@ -1,12 +1,12 @@
 // Mock Auth0 APIs
-export const auth0 = {
+const auth0 = {
   getSession: jest.fn(() => Promise.resolve({})),
   withPageAuthRequired: jest.fn(component => component),
   getAccessToken: jest.fn(() => Promise.resolve('access-token')),
 };
 
 // Client-side Auth0 mocks
-export const useUser = jest.fn(() => {
+const useUser = jest.fn(() => {
   return {
     user: { 
       name: 'Test User',
@@ -18,6 +18,13 @@ export const useUser = jest.fn(() => {
   };
 });
 
-export const Auth0Provider = ({ children }) => children;
+const Auth0Provider = ({ children }) => children;
 
-export const withPageAuthRequired = jest.fn(component => component); 
+const withPageAuthRequired = jest.fn(component => component);
+
+module.exports = {
+  auth0,
+  useUser,
+  Auth0Provider,
+  withPageAuthRequired
+}; 

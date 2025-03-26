@@ -1,5 +1,5 @@
 // Mock for Auth0's server components
-export class Auth0Client {
+class Auth0Client {
   constructor(options) {
     this.options = options;
   }
@@ -20,7 +20,8 @@ export class Auth0Client {
 }
 
 // Export for server components and API routes
-export default {
+module.exports = {
+  Auth0Client,
   auth0: new Auth0Client({}),
   withApiAuthRequired: (handler) => handler,
   withPageAuthRequired: (component) => component,
