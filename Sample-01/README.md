@@ -152,7 +152,7 @@ export default async function ProfilePage() {
   
   // Redirect to login if not authenticated
   if (!session?.user) {
-    return redirect("/api/auth/login");
+    return redirect("/auth/login");
   }
   
   return (
@@ -193,9 +193,9 @@ export default async function NavBar() {
         )}
         <li>
           {isAuthenticated ? (
-            <a href="/api/auth/logout">Logout</a>
+            <a href="/auth/logout">Logout</a>
           ) : (
-            <a href="/api/auth/login">Login</a>
+            <a href="/auth/login">Login</a>
           )}
         </li>
       </ul>
