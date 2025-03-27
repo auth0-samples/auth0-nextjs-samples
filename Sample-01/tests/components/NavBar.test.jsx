@@ -1,12 +1,12 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 
-import { withUserProvider, mockUser } from '../fixtures';
+import { withAuth0Provider, mockUser } from '../fixtures';
 import NavBar from '../../components/NavBar';
 
 describe('NavBar', () => {
   it('should render in logged out state', async () => {
-    render(<NavBar />, { wrapper: withUserProvider({ user: undefined }) });
+    render(<NavBar />, { wrapper: withAuth0Provider({ user: undefined }) });
 
     expect(screen.getByTestId('navbar')).toBeInTheDocument();
     expect(screen.getByTestId('navbar-toggle')).toBeInTheDocument();
@@ -20,7 +20,7 @@ describe('NavBar', () => {
   });
 
   it('should render in logged in state', async () => {
-    render(<NavBar />, { wrapper: withUserProvider({ user: mockUser }) });
+    render(<NavBar />, { wrapper: withAuth0Provider({ user: mockUser }) });
 
     expect(screen.getByTestId('navbar-items').children).toHaveLength(4);
     expect(screen.getByTestId('navbar-home')).toBeInTheDocument();

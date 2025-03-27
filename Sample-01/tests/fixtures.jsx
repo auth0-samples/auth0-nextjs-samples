@@ -1,4 +1,4 @@
-import { UserProvider } from '@auth0/nextjs-auth0/client';
+import { Auth0Provider } from '@auth0/nextjs-auth0';
 
 export const mockUser = {
   email: 'foo@example.com',
@@ -10,6 +10,6 @@ export const mockUser = {
   updated_at: null
 };
 
-export const withUserProvider = ({ user, profileUrl } = {}) => {
-  return props => <UserProvider {...props} user={user} profileUrl={profileUrl} />;
+export const withAuth0Provider = ({ user, profileUrl } = {}) => {
+  return props => <Auth0Provider {...props} user={user} profileUrl={profileUrl} />;
 };
