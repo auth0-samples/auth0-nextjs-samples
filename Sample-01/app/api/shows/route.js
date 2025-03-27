@@ -1,12 +1,19 @@
-import { getAccessToken, withApiAuthRequired } from '@auth0/nextjs-auth0';
 import { NextResponse } from 'next/server';
+import { auth0 } from '../../../lib/auth0';
 
-export const GET = withApiAuthRequired(async function shows(req) {
+export const GET = async function shows() {
   try {
+    const session = await auth0.getSession();
+
+    if (!session) {
+      return NextResponse.json(
+        { error: 'Not authenticated' },
+        { status: 401 }
+      );
+    }
+
     const res = new NextResponse();
-    const { accessToken } = await getAccessToken(req, res, {
-      scopes: ['read:shows']
-    });
+    const { token: accessToken } = await auth0.getAccessToken();
     const apiPort = process.env.API_PORT || 3001;
     const response = await fetch(`http://localhost:${apiPort}/api/shows`, {
       headers: {
@@ -19,4 +26,4 @@ export const GET = withApiAuthRequired(async function shows(req) {
   } catch (error) {
     return NextResponse.json({ error: error.message }, { status: error.status || 500 });
   }
-});
+};

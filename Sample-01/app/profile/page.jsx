@@ -2,13 +2,12 @@
 
 import React from 'react';
 import { Row, Col } from 'reactstrap';
-import { useUser, withPageAuthRequired } from '@auth0/nextjs-auth0/client';
+import { useUser } from '@auth0/nextjs-auth0';
 
 import Loading from '../../components/Loading';
-import ErrorMessage from '../../components/ErrorMessage';
 import Highlight from '../../components/Highlight';
 
-function Profile() {
+export default function Profile() {
   const { user, isLoading } = useUser();
 
   return (
@@ -41,8 +40,3 @@ function Profile() {
     </>
   );
 }
-
-export default withPageAuthRequired(Profile, {
-  onRedirecting: () => <Loading />,
-  onError: error => <ErrorMessage>{error.message}</ErrorMessage>
-});

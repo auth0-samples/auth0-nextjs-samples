@@ -1,9 +1,8 @@
 'use client';
 
 import React from 'react';
-import { withPageAuthRequired } from '@auth0/nextjs-auth0/client';
 
-export default withPageAuthRequired(function CSRPage() {
+export default function CSRPage() {
   return (
     <>
       <div className="mb-5" data-testid="csr">
@@ -20,10 +19,10 @@ export default withPageAuthRequired(function CSRPage() {
             custom <a href="https://nextjs.org/docs/advanced-features/custom-app">App Component</a> with it.
           </p>
           <p>
-            You can also fetch the user profile by calling the <code>/api/auth/me</code> API route.
+            You can also fetch the user profile by calling the <code>/auth/profile</code> API route.
           </p>
         </div>
       </div>
     </>
   );
-});
+};
