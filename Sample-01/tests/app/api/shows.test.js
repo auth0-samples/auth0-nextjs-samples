@@ -1,14 +1,14 @@
 /**
  * @jest-environment node
  */
-
+import { vi } from 'vitest';
 import { GET as shows } from '../../../app/api/shows/route';
 
-const req = jest.fn();
+const req = vi.fn();
 const res = (() => {
   const mock = {};
-  mock.status = jest.fn().mockReturnValue(mock);
-  mock.json = jest.fn().mockReturnValue(mock);
+  mock.status = vi.fn().mockReturnValue(mock);
+  mock.json = vi.fn().mockReturnValue(mock);
   return mock;
 })();
 
@@ -18,7 +18,7 @@ describe('/api/shows', () => {
   });
 
   it('should call the external API', async () => {
-    global.fetch = jest.fn().mockReturnValue({ json: () => Promise.resolve({ msg: 'Text' }) });
+    global.fetch = vi.fn().mockReturnValue({ json: () => Promise.resolve({ msg: 'Text' }) });
 
     const res = await shows(req);
 
@@ -27,7 +27,7 @@ describe('/api/shows', () => {
   });
 
   it('should fail when the external API call fails', async () => {
-    global.fetch = jest.fn().mockReturnValue({ json: () => Promise.reject(new Error('Error')) });
+    global.fetch = vi.fn().mockReturnValue({ json: () => Promise.reject(new Error('Error')) });
 
     const res = await shows(req);
 

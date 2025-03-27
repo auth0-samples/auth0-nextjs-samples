@@ -8,8 +8,8 @@
     "build": "next build",
     "start": "concurrently \"next start\" \"node api-server\"",
     "start:api": "node api-server",
-    "test": "jest tests --coverage --maxWorkers=10",
-    "test:watch": "jest --coverage --watch",
+    "test": "vitest run",
+    "test:watch": "vitest watch",
     "test:integration": "start-server-and-test start http-get://localhost:3000 cypress:run",
     "test:integration:watch": "start-server-and-test start http-get://localhost:3000 cypress:open",
     "cypress:run": "cypress run --browser chrome",
@@ -40,39 +40,12 @@
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
-    "babel-jest": "^29.7.0",
+    "@vitejs/plugin-react": "^4.3.4",
     "cypress": "^12.7.0",
     "eslint-config-next": "15.2.4",
     "identity-obj-proxy": "^3.0.0",
-    "jest": "^29.7.0",
-    "jest-environment-jsdom": "^29.7.0",
     "prettier": "^3.1.0",
-    "start-server-and-test": "^2.0.0"
-  },
-  "jest": {
-    "testEnvironment": "jsdom",
-    "rootDir": "./",
-    "moduleNameMapper": {
-      ".(css)$": "identity-obj-proxy"
-    },
-    "moduleFileExtensions": [
-      "js",
-      "jsx"
-    ],
-    "setupFiles": [
-      "./tests/environment.js"
-    ],
-    "setupFilesAfterEnv": [
-      "./tests/setup.js"
-    ],
-    "collectCoverageFrom": [
-      "components/**/*.*",
-      "pages/**/*.*"
-    ],
-    "coverageReporters": [
-      "lcov",
-      "text",
-      "text-summary"
-    ]
+    "start-server-and-test": "^2.0.0",
+    "vitest": "^3.0.9"
   }
 }

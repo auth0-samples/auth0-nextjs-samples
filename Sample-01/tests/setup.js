@@ -1,19 +1,20 @@
 import '@testing-library/jest-dom';
+import { vi } from 'vitest';
 
 import initFontAwesome from '../utils/initFontAwesome';
 
 initFontAwesome();
 
 afterEach(() => {
-  jest.clearAllMocks();
-  jest.resetModules();
+  vi.clearAllMocks();
+  vi.resetModules();
 });
 
-jest.mock('next/navigation', () => ({
+vi.mock('next/navigation', () => ({
   usePathname: () => ''
 }));
 
-jest.mock('@auth0/nextjs-auth0', () => {
+vi.mock('@auth0/nextjs-auth0', () => {
   return {
     getSession: () => ({
       user: {
