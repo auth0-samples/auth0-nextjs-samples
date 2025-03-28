@@ -14,15 +14,15 @@ vi.mock('next/navigation', () => ({
   usePathname: () => ''
 }));
 
-vi.mock('@auth0/nextjs-auth0', () => {
+vi.mock('./../lib/auth0', () => {
   return {
-    getSession: () => ({
-      user: {
-        sub: 'bob'
-      }
-    }),
-    getAccessToken: () => 'access_token',
-    withApiAuthRequired: handler => handler,
-    withPageAuthRequired: page => () => page()
+    auth0: {
+      getSession: () => ({
+        user: {
+          sub: 'bob'
+        }
+      }),
+      getAccessToken: () => 'access_token',
+    }
   };
 });
