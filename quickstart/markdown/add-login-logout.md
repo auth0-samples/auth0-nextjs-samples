@@ -1,1 +1,1 @@
-Update your application to display login and logout links based on the user's authentication state. Display the user's profile information when authenticated.
+The following example shows how to display login and logout links based on the user's authentication state, and show the user's profile when authenticated. If you prefer consuming authentication data on the client side, see [app/client/page.js](%GIT_REMOTE%/blob/%GIT_BRANCH%/app/client/page.js).
