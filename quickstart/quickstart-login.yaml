@@ -1,0 +1,164 @@
+appType: "webapp"
+technology: "nextjs"
+technologyLabel: "Next.js"
+sdkVersion: &sdkVersion "4.x"
+defaultAppOrigin:
+  scheme: &appScheme "http"
+  domain: &appDomain "localhost"
+  port: &port 3000
+outputFolderName: &outputFolderName "auth0-nextjs-samples"
+callbackPath: "/auth/callback"
+logoutPath: "/"
+defaultEnvFileName: &defaultEnvFileName ".env.local"
+
+inputs:
+  auth0Domain:
+  auth0ClientId:
+  auth0ClientSecret:
+  sessionCookieSecret:
+  port:
+    default: *port
+  appDomain:
+    default: *appDomain
+  appScheme:
+    default: *appScheme
+
+placeholders:
+  "%GIT_REMOTE%":
+    environmentKey: "gitRemote"
+  "%GIT_BRANCH%":
+    environmentKey: "gitBranch"
+  "%DOWNLOAD_URL%":
+    environmentKey: "downloadUrl"
+  "%FOLDER_NAME%": *outputFolderName
+  "%PORT%":
+    inputKey: "port"
+  "%AUTH0_DOMAIN%":
+    inputKey: "auth0Domain"
+  "%AUTH0_CLIENT_ID%":
+    inputKey: "auth0ClientId"
+  "%AUTH0_CLIENT_SECRET%":
+    inputKey: "auth0ClientSecret"
+  "%AUTH0_SECRET%":
+    inputKey: "sessionCookieSecret"
+  "%ENV_FILE_NAME%": *defaultEnvFileName
+  "%SDK_VERSION%": *sdkVersion
+  "%APP_DOMAIN%":
+    inputKey: "appDomain"
+  "%APP_SCHEME%":
+    inputKey: "appScheme"
+
+snippets:
+  get-app: &getApp
+    source: "quickstart/scripts/get-app.sh"
+    language: "bash"
+  configure: &configure
+    source: "quickstart/scripts/configure.sh"
+    language: "bash"
+  start: &start
+    source: "quickstart/scripts/start.sh"
+    language: "bash"
+  install-auth0: &installAuth0
+    source: "quickstart/scripts/install-auth0.sh"
+    language: "bash"
+  env: &env
+    fileName: *defaultEnvFileName
+    content: | # make
+      APP_BASE_URL=%APP_SCHEME%://%APP_DOMAIN%:%PORT%
+      AUTH0_DOMAIN=%AUTH0_DOMAIN%
+      AUTH0_CLIENT_ID=%AUTH0_CLIENT_ID%
+      AUTH0_CLIENT_SECRET=%AUTH0_CLIENT_SECRET%
+
+      # 64 character random string to encrypt the session cookie
+      #
+      # We're generating a secret for your convenience, but for production,
+      # generate your own secret using `openssl rand -hex 32`
+      AUTH0_SECRET=%AUTH0_SECRET%
+    language: "bash"
+  lib-auth0: &libAuth0
+    source: "lib/auth0.js"
+    language: "js"
+  proxy-js: &proxyJs
+    source: "proxy.js"
+    language: "js"
+  app-page: &appPage
+    source: "app/page.js"
+    language: "jsx"
+
+tryOutStep: &tryOutStep
+  - title: "Try it out"
+    contentBlocks:
+      - type: markdown
+        source: "quickstart/markdown/try-steps.md"
+
+download:
+  - title: "Clone or download the sample app"
+    contentBlocks:
+      - type: markdown
+        source: "quickstart/markdown/git-clone.md"
+      - type: terminal
+        <<: *getApp
+      - type: markdown
+        source: "quickstart/markdown/get-app.md"
+  - title: "Configure the sample app"
+    contentBlocks:
+      - type: markdown
+        source: "quickstart/markdown/configure.md"
+      - type: terminal
+        <<: *configure
+      - type: markdown
+        source: "quickstart/markdown/copy-env.md"
+      - type: snippet
+        <<: *env
+  - title: "Start the app"
+    contentBlocks:
+      - type: markdown
+        source: "quickstart/markdown/port-explanation.md"
+      - type: terminal
+        <<: *start
+  - <<: *tryOutStep
+
+steps:
+  - title: "Configure environment variables"
+    contentBlocks:
+      - type: markdown
+        source: "quickstart/markdown/env-config.md"
+      - type: snippet
+        <<: *env
+  - title: "Install the Auth0 Next.js SDK"
+    contentBlocks:
+      - type: markdown
+        source: "quickstart/markdown/install-sdk.md"
+      - type: terminal
+        <<: *installAuth0
+  - title: "Create the Auth0 client"
+    contentBlocks:
+      - type: markdown
+        source: "quickstart/markdown/auth0-client.md"
+      - type: snippet
+        <<: *libAuth0
+  - title: "Add the proxy layer"
+    contentBlocks:
+      - type: markdown
+        source: "quickstart/markdown/add-proxy.md"
+      - type: snippet
+        <<: *proxyJs
+      - type: markdown
+        source: "quickstart/markdown/proxy-routes.md"
+  - title: "Add login/logout to your app"
+    contentBlocks:
+      - type: markdown
+        source: "quickstart/markdown/add-login-logout.md"
+      - type: snippet
+        <<: *appPage
+  - <<: *tryOutStep
+
+nextSteps:
+  links:
+    - label: "SDK Usage Examples"
+      url: "https://github.com/auth0/nextjs-auth0/blob/main/EXAMPLES.md"
+    - label: "Auth0 Next.js SDK"
+      url: "https://github.com/auth0/nextjs-auth0"
+
+# Used by the CLI to generate the .env file
+envSnippet: *env
