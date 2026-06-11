@@ -103,6 +103,13 @@ Auth0 helps you to:
 1. Go to [Auth0](https://auth0.com) and click **Sign Up**.
 2. Use Google, GitHub, or Microsoft Account to login.
 
+## Deploy to Vercel
+Easily deploy to the template to Vercel with the button below.
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fauth0-samples%2Fauth0-nextjs-samples%2Ftree%2Fmain%2FSample-01&products=%5B%7B%22type%22%3A%22integration%22%2C%22integrationSlug%22%3A%22auth0%22%2C%22productSlug%22%3A%22client%22%2C%22protocol%22%3A%22authentication%22%7D%5D)
+
+### Updating Allowed Callback URLs
+When using custom domains for your Vercel deployment, you will need to add them to the Allowed Callback URLs. More details [here](https://auth0.com/docs/authenticate/login/redirect-users-after-login#redirect-users-to-callback-urls-on-the-allowlist).
 ## Issue Reporting
 
 If you have found a bug or if you have a feature request, please report them at this repository issues section. Please do not report security vulnerabilities on the public GitHub issue tracker. The [Responsible Disclosure Program](https://auth0.com/responsible-disclosure-policy) details the procedure for disclosing security issues.
