@@ -37,3 +37,11 @@ p code {
 .result-block-container .result-block {
   opacity: 1;
 }
+
+.nav-container .logo {
+  background-image: url("https://cdn.auth0.com/quantum-assets/dist/latest/logos/auth0/auth0-lockup-en-onlight.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 110px;
+  height: 32px;
+}
