@@ -47,7 +47,7 @@
     "@testing-library/react": "^16.2.0",
     "@vitejs/plugin-react": "^4.3.4",
     "babel-jest": "^29.7.0",
-    "cypress": "^12.7.0",
+    "cypress": "^15.17.0",
     "eslint-config-next": "15.2.4",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^29.7.0",
